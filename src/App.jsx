@@ -7,7 +7,6 @@ function App() {
     <>
       <GlobalStyle />
       <RouterProvider router={router} />
-      <p>안녕</p>
     </>
   );
 }
