@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "noEmit": true,
+
+    /* 절대경로 */
+    "baseUrl": "src",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+
+    /*svg 모듈 */
+    "types": ["vite-plugin-svgr/client"]
+  },
+  "include": ["vite.config.js"]
+}
