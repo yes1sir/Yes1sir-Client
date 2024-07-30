@@ -4,6 +4,7 @@ const colors = {
   b01: "#2E2856",
 
   w01: "#FFF",
+  w02: "#EAE7F9",
 };
 
 const fonts = {
