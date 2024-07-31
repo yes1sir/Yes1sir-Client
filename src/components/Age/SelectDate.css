@@ -1,0 +1,30 @@
+.d-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.app-container {
+  border-top: 0.5px solid #8b8b8b;
+  border-bottom: 0.5px solid #8b8b8b;
+}
+
+.app {
+  width: 400px;
+  background-color: #c4c1d8;
+  padding: 30px;
+}
+
+.app .app-select {
+  width: 30%;
+}
+
+.app .app-select select {
+  width: 100%;
+  padding: 10px;
+  outline: none;
+  background-color: #c4c1d8;
+  appearance: none;
+  text-align: center;
+  border: none;
+}

@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Backspace from "../../components/common/Backspace";
+import SelectDate from "../../components/Age/SelectDate";
 
 function Age() {
   return (
     <AgeWrapper>
       <Backspace />
       <AgeText>생년월일을 기입해주세요</AgeText>
-      <div>date picker</div>
+      <SelectDate />
       <Link to="/target">
         <ContinueBtn>계속하기</ContinueBtn>
       </Link>
@@ -33,7 +34,6 @@ const ContinueBtn = styled.button`
   width: 25.4rem;
   height: 7rem;
   border-radius: 100px;
-  margin-top: 64px;
   font-size: 2.4rem;
   color: ${({ theme }) => theme.colors.b01};
   background-color: ${({ theme }) => theme.colors.w02};
