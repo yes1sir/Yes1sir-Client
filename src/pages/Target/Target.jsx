@@ -7,7 +7,7 @@ import ArrowBackIcon from "@/assets/svgs/arrow_back.svg?react";
 function Target() {
   return (
     <TargetWrapper>
-      <IconWrapper>
+      <IconWrapper to="/age">
         <ArrowBackIcon />
       </IconWrapper>
 
@@ -38,7 +38,7 @@ const TargetWrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.b01};
 `;
 
-const IconWrapper = styled.div`
+const IconWrapper = styled(Link)`
   display: flex;
   width: 100%;
   padding-left: 50px;
