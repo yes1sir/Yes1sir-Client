@@ -9,7 +9,9 @@ function HomeLogout() {
     <HomeLogoutWrapper>
       <HomeLogoutText />
       <HomeLogoutFix />
-      <HomeLogoutMbti />
+      <HomeLogoutMbtiContainer>
+        <HomeLogoutMbti />
+      </HomeLogoutMbtiContainer>
     </HomeLogoutWrapper>
   );
 }
@@ -23,4 +25,9 @@ const HomeLogoutWrapper = styled.main`
   height: 170.3rem;
   background-image: url("src/assets/images/bg.png");
   background-size: cover;
+`;
+
+const HomeLogoutMbtiContainer = styled.div`
+  margin-left: 10rem;
+  margin-top: 15.4rem;
 `;
