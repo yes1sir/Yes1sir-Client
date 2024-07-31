@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import SelectBox from "../../components/Target/SelectBox";
-import selectTarget from "../../constants/selectTarget";
+import selectTarget from "../../constants/Target/selectTarget";
 import ArrowBackIcon from "@/assets/svgs/arrow_back.svg?react";
 
 function Target() {
