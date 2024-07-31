@@ -34,6 +34,14 @@ const fonts = {
     line-height: var(--Title-Large-Line-Height, 28px); /* 127.273% */
     letter-spacing: var(--Title-Large-Tracking, 0px);
   `,
+  M3_title_normal: css`
+    font-family: Inter;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 4px;
+  `,
   M3_content_large: css`
     font-family: Inter;
     font-size: 32px;
