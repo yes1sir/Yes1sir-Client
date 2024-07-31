@@ -15,6 +15,14 @@ const fonts = {
     line-height: var(--Headline-Large-Line-Height, 40px); /* 125% */
     letter-spacing: var(--Headline-Large-Tracking, 0px);
   `,
+  M3_headline_normal: css`
+    font-family: Inter;
+    font-size: 35px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 3.5px;
+  `,
 };
 
 const theme = {
