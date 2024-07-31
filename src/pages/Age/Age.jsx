@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import Backspace from "../../components/common/Backspace";
 
 function Age() {
   return (
     <AgeWrapper>
+      <Backspace />
       <AgeText>생년월일을 기입해주세요</AgeText>
       <div>date picker</div>
       <Link to="/target">
@@ -17,9 +19,7 @@ const AgeWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 144rem;
-  height: 170.3rem;
-
+  height: 102.4rem;
   background-color: ${({ theme }) => theme.colors.b01};
 `;
 
