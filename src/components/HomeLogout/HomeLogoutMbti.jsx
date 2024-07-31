@@ -6,7 +6,7 @@ const HomeLogoutMbti = () => {
     <HomeLogoutMbtiWrapper>
       <HomeLogoutMbtiContainer>
         {mbtiCircles.map((circle, index) => (
-          <Circle key={index} borderColor={circle.color}>
+          <Circle key={index} $borderColor={circle.color}>
             {circle.text}
           </Circle>
         ))}
