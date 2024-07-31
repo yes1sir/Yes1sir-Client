@@ -32,6 +32,7 @@ const HomeLogoutFixContainer = styled.div`
   align-items: center;
   gap: 3rem;
   margin-left: 10rem;
+  padding-bottom: 8rem;
 `;
 
 const HomeLogoutFixBox = styled.div`
