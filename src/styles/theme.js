@@ -2,11 +2,14 @@ import { css } from "styled-components";
 
 const colors = {
   b01: "#2E2856",
+  b02: "#454545",
 
   w01: "#FFF",
   w02: "#EAE7F9",
 
   g01: "#C2C2C9",
+  g02: "#c4c1d8",
+  g03: "#8b8b8b",
 };
 
 const fonts = {
