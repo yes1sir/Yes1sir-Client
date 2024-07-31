@@ -32,9 +32,9 @@ const FirstText = styled.p`
 `;
 
 const SecondText = styled.p`
-  width: 80rem;
   display: flex;
-  color: ${({ theme }) => theme.colors.w01};
   text-align: right;
+  padding-left: 24rem;
+  color: ${({ theme }) => theme.colors.w01};
   ${({ theme }) => theme.fonts.M3_headline_normal};
 `;
