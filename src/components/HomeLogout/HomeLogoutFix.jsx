@@ -1,13 +1,18 @@
 import { styled } from "styled-components";
-import HomeLogoutFixBoxContent from "./HomeLogoutFixBoxContent";
+import HomeLogoutFixBoxContent from "@/components/HomeLogout/HomeLogoutFixBoxContent";
+import useNavigateToLogin from "@/utils/common/useNavigateToLogin";
 
 function HomeLogoutFix() {
+  const navigateToLogin = useNavigateToLogin();
+
   return (
     <HomeLogoutFixContainer>
       <HomeLogoutFixBox>
         <HomeLogoutFixBoxContent />
       </HomeLogoutFixBox>
-      <HomeLogoutFixBtn>나의 피부타입 진단하기</HomeLogoutFixBtn>
+      <HomeLogoutFixBtn onClick={navigateToLogin}>
+        나의 피부타입 진단하기
+      </HomeLogoutFixBtn>
     </HomeLogoutFixContainer>
   );
 }

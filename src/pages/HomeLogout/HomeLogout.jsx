@@ -2,7 +2,7 @@ import { styled } from "styled-components";
 
 import HomeLogoutText from "@/components/HomeLogout/HomeLogoutText";
 import HomeLogoutFix from "@/components/HomeLogout/HomeLogoutFix";
-import HomeLogoutMbti from "../../components/HomeLogout/HomeLogoutMbti";
+import HomeLogoutMbti from "@/components/HomeLogout/HomeLogoutMbti";
 
 function HomeLogout() {
   return (

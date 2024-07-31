@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import mbtiCircles from "../../constants/HomeLogout/mbtiCircles";
+import mbtiCircles from "@/constants/HomeLogout/mbtiCircles";
 
 const HomeLogoutMbti = () => {
   return (

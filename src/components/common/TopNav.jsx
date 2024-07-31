@@ -1,13 +1,16 @@
 import { styled } from "styled-components";
+import useNavigateToLogin from "@/utils/common/useNavigateToLogin";
 
 import HamburgerIcon from "@/assets/svgs/hamburger.svg?react";
 
 function TopNav() {
+  const navigateToLogin = useNavigateToLogin();
+
   return (
     <HeaderWrapper>
       <LogoBtn>LOGO</LogoBtn>
       <HeaderContainer>
-        <LoginBtn>Log In</LoginBtn>
+        <LoginBtn onClick={navigateToLogin}>Log In</LoginBtn>
         <HamburgerIcon />
       </HeaderContainer>
     </HeaderWrapper>

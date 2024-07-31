@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import ArrowExpandIcon from "@/assets/svgs/arrow-expand.svg?react";
-import fixContent from "../../constants/HomeLogout/fixContent";
+import fixContent from "@/constants/HomeLogout/fixContent";
 
 function HomeLogoutFixBoxContent() {
   return (
