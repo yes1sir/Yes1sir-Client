@@ -6,7 +6,7 @@ const HomeLogoutMbti = () => {
     <HomeLogoutMbtiWrapper>
       <HomeLogoutMbtiContainer>
         {mbtiCircles.map((circle, index) => (
-          <Circle key={index} $borderColor={circle.color}>
+          <Circle key={index} color={circle.color}>
             {circle.text}
           </Circle>
         ))}
@@ -40,7 +40,7 @@ const Circle = styled.div`
   width: 18.4543rem;
   height: 18.4543rem;
   border-radius: 50%;
-  border: 6px solid ${(props) => props.borderColor};
+  border: 6px solid ${(props) => props.color};
   ${({ theme }) => theme.fonts.M3_content_large};
   color: ${({ theme }) => theme.colors.b01};
   background-color: ${({ theme }) => theme.colors.g01};
