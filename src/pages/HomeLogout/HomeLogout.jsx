@@ -1,11 +1,13 @@
 import { styled } from "styled-components";
 
 import HomeLogoutText from "@/components/HomeLogout/HomeLogoutText";
+import HomeLogoutFix from "@/components/HomeLogout/HomeLogoutFix";
 
 function HomeLogout() {
   return (
     <HomeLogoutWrapper>
       <HomeLogoutText />
+      <HomeLogoutFix />
     </HomeLogoutWrapper>
   );
 }
