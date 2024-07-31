@@ -1,19 +1,16 @@
 import styled from "styled-components";
-import SelectBox from "../../components/SelectBox";
 import { Link } from "react-router-dom";
+import SelectBox from "../../components/Target/SelectBox";
+import selectTarget from "../../constants/selectTarget";
+import ArrowBackIcon from "@/assets/svgs/arrow_back.svg?react";
 
 function Target() {
-  const selectTarget = [
-    "여드름 발진을 억제합니다",
-    "막힌 모공을 깨끗이 합니다",
-    "검은 반점을 제거합니다",
-    "피부 탄력을 높여줍니다",
-    "피부 질감이 좋아집니다",
-    "주름을 제거합니다",
-  ];
-
   return (
     <TargetWrapper>
+      <IconWrapper>
+        <ArrowBackIcon />
+      </IconWrapper>
+
       <TextWrapper>
         <TargetHeadline>피부 목표를 설정해주세요</TargetHeadline>
         <TargetDescription>(복수 선택 가능)</TargetDescription>
@@ -21,7 +18,7 @@ function Target() {
 
       <BoxWrapper>
         {selectTarget.map((val) => (
-          <SelectBox key={val.indexOf} text={val} />
+          <SelectBox key={val.id} text={val.text} />
         ))}
       </BoxWrapper>
 
@@ -32,13 +29,20 @@ function Target() {
   );
 }
 
-const TargetWrapper = styled.body`
+const TargetWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
 
   color: ${({ theme }) => theme.colors.w01};
   background-color: ${({ theme }) => theme.colors.b01};
+`;
+
+const IconWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  padding-left: 50px;
+  padding-top: 23px;
 `;
 
 const TextWrapper = styled.div`
