@@ -2,11 +2,21 @@ import { styled } from "styled-components";
 import HomeLoginTitle from "@/components/HomeLogin/HomeLoginTitle";
 import HomeLogoutMbti from "@/components/HomeLogout/HomeLogoutMbti";
 import HomeLoginBtn from "@/components/common/HomeLoginBtn";
+import mbtiCircles from "@/constants/HomeLogout/mbtiCircles";
 
 function HomeLogin() {
+  const userName = "유승빈";
+  const skinType = "DRPT";
+  const mbtiCircle = mbtiCircles.find((circle) => circle.text === skinType);
+  const textColor = mbtiCircle ? mbtiCircle.color : "#000";
+
   return (
     <HomeLoginWrapper>
-      <HomeLoginTitle />
+      <HomeLoginTitle
+        name={userName}
+        skinType={skinType}
+        textColor={textColor}
+      />
       <HomeLoginBtn
         backgroundcolor="#42A5C4"
         color="#FFF"
