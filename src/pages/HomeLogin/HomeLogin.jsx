@@ -5,6 +5,8 @@ import HomeLogoutMbti from "@/components/HomeLogout/HomeLogoutMbti";
 import HomeLoginBtn from "@/components/common/HomeLoginBtn";
 import mbtiCircles from "@/constants/HomeLogout/mbtiCircles";
 import HomeLoginMbtiContent from "@/components/HomeLogin/HomeLoginMbtiContent";
+import mbtiContent from "@/constants/HomeLogin/mbtiContent";
+import mbtiTitle from "@/constants/HomeLogin/mbtiTitle";
 
 function HomeLogin() {
   const userName = "유승빈";
@@ -15,9 +17,13 @@ function HomeLogin() {
     mbtiCircles.find((circle) => circle.text === skinType) || mbtiCircles[0];
   const [selectedMbtiCircle, setSelectedMbtiCircle] =
     useState(initialMbtiCircle);
+  const [mbtiContentText, setMbtiContentText] = useState(mbtiContent[skinType]);
+  const [mbtiContentTitle, setMbtiContentTitle] = useState(mbtiTitle[skinType]);
 
   const handleMbtiClick = (circle) => {
     setSelectedMbtiCircle(circle);
+    setMbtiContentText(mbtiContent[circle.text]);
+    setMbtiContentTitle(mbtiTitle[circle.text]);
   };
 
   return (
@@ -33,7 +39,11 @@ function HomeLogin() {
         text="다시 진단받기"
       />
       <HomeLogoutMbti onMbtiClick={handleMbtiClick} />
-      <HomeLoginMbtiContent $bgColor={selectedMbtiCircle?.color} />
+      <HomeLoginMbtiContent
+        $bgColor={selectedMbtiCircle?.color}
+        content={mbtiContentText}
+        title={mbtiContentTitle}
+      />
     </HomeLoginWrapper>
   );
 }
