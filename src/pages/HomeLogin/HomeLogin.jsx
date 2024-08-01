@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import HomeLoginTitle from "@/components/HomeLogin/HomeLoginTitle";
@@ -15,13 +15,24 @@ function HomeLogin() {
   const mbtiCircle = mbtiCircles.find((circle) => circle.text === skinType);
   const textColor = mbtiCircle?.color;
   const initialMbtiCircle = mbtiCircle || mbtiCircles[0];
+  const initialIndex = mbtiCircles.findIndex(
+    (circle) => circle.text === skinType
+  );
+
   const [selectedMbtiCircle, setSelectedMbtiCircle] =
     useState(initialMbtiCircle);
   const [mbtiContentText, setMbtiContentText] = useState(mbtiContent[skinType]);
   const [mbtiContentTitle, setMbtiContentTitle] = useState(mbtiTitle[skinType]);
-  const [selectedIndex, setSelectedIndex] = useState(null);
+  const [selectedIndex, setSelectedIndex] = useState(initialIndex);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setSelectedMbtiCircle(mbtiCircles[initialIndex]);
+    setMbtiContentText(mbtiContent[skinType]);
+    setMbtiContentTitle(mbtiTitle[skinType]);
+    setSelectedIndex(initialIndex);
+  }, [initialIndex, skinType]);
 
   const handleMbtiClick = (circle, index) => {
     const isSelected = selectedIndex === index;
