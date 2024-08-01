@@ -14,8 +14,7 @@ function HomeLogin() {
   const skinType = "DRPT";
   const mbtiCircle = mbtiCircles.find((circle) => circle.text === skinType);
   const textColor = mbtiCircle?.color;
-  const initialMbtiCircle =
-    mbtiCircles.find((circle) => circle.text === skinType) || mbtiCircles[0];
+  const initialMbtiCircle = mbtiCircle || mbtiCircles[0];
   const [selectedMbtiCircle, setSelectedMbtiCircle] =
     useState(initialMbtiCircle);
   const [mbtiContentText, setMbtiContentText] = useState(mbtiContent[skinType]);
@@ -25,17 +24,11 @@ function HomeLogin() {
   const navigate = useNavigate();
 
   const handleMbtiClick = (circle, index) => {
-    if (selectedIndex === index) {
-      setSelectedMbtiCircle(null);
-      setMbtiContentText("");
-      setMbtiContentTitle("");
-      setSelectedIndex(null);
-    } else {
-      setSelectedMbtiCircle(circle);
-      setMbtiContentText(mbtiContent[circle.text]);
-      setMbtiContentTitle(mbtiTitle[circle.text]);
-      setSelectedIndex(index);
-    }
+    const isSelected = selectedIndex === index;
+    setSelectedMbtiCircle(isSelected ? null : circle);
+    setMbtiContentText(isSelected ? "" : mbtiContent[circle.text]);
+    setMbtiContentTitle(isSelected ? "" : mbtiTitle[circle.text]);
+    setSelectedIndex(isSelected ? null : index);
   };
 
   const handleBtnClick = () => {
