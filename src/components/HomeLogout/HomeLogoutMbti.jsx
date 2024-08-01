@@ -23,8 +23,6 @@ const HomeLogoutMbtiWrapper = styled.div`
   align-items: center;
   width: 75.6rem;
   height: 75.6rem;
-  margin-left: 10rem;
-  margin-top: 15.4rem;
 `;
 
 const HomeLogoutMbtiContainer = styled.div`
@@ -44,4 +42,5 @@ const Circle = styled.div`
   ${({ theme }) => theme.fonts.M3_content_large};
   color: ${({ theme }) => theme.colors.b01};
   background-color: ${({ theme }) => theme.colors.g01};
+  cursor: pointer;
 `;
