@@ -4,20 +4,17 @@ import CheckBlankIcon from "@/assets/svgs/check_blank.svg?react";
 import CheckIcon from "@/assets/svgs/check.svg?react";
 import PropTypes from "prop-types";
 
-export default function SelectBox({ text, onClick }) {
-  const [toggle, setToggle] = useState(false);
-
+export default function SelectBox({ text, onClick, isSelected }) {
   const handleClick = () => {
-    setToggle(true);
     if (onClick) {
-      // onClick이 정의되어 있을 때만 호출
       onClick();
+      console.log(isSelected)
     }
   };
 
   return (
     <BoxWrapper onClick={handleClick}>
-      {toggle ? <CheckIcon /> : <CheckBlankIcon />}
+      {isSelected ? <CheckIcon /> : <CheckBlankIcon />}
       <BoxText>{text}</BoxText>
     </BoxWrapper>
   );
@@ -47,4 +44,5 @@ const BoxText = styled.p`
 SelectBox.propTypes = {
   text: PropTypes.string.isRequired,
   onClick: PropTypes.func,
+  isSelected: PropTypes.bool,
 };

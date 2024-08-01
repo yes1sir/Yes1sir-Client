@@ -2,36 +2,49 @@ import { useState, useCallback, useEffect } from "react";
 import styled from "styled-components";
 import SelectBox from "../../components/Target/SelectBox";
 import HomeLoginBtn from "../../components/common/HomeLoginBtn";
+import ProgressIndicator from "../../components/Test/ProgressIndicator";
 
 import testList from "@/constants/Test/testList";
 import typeSum from "@/constants/Test/typeSum";
-import ProgressIndicator from "../../components/Test/ProgressIndicator";
 
 function Test() {
   const [list, setList] = useState(typeSum);
   const [page, setPage] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
 
+  const [selectedAnswerIndices, setSelectedAnswerIndices] = useState({});
+
   const handleAnswer = useCallback((type, count, idx) => {
     setSelectedAnswer({ type, count, idx });
-  }, []);
+    setSelectedAnswerIndices(prev => ({ ...prev, [page]: idx }));
+  }, [page]);
+
+  const handleGoBack = useCallback(() => {
+    if (page > 0) {
+      setPage(prevPage => prevPage - 1);
+      setSelectedAnswerIndices(prev => {
+        const newSelectedAnswerIndices = { ...prev };
+        delete newSelectedAnswerIndices[page];
+        return newSelectedAnswerIndices;
+      });
+    }
+  }, [page]);
 
   useEffect(() => {
     let timer;
     if (selectedAnswer) {
       timer = setTimeout(() => {
-        setList((prevList) => {
+        setList(prevList => {
           const newList = [...prevList];
           for (let i = 0; i < newList.length; i++) {
             if (selectedAnswer.type === newList[i].name) {
               newList[i].sum += selectedAnswer.count;
-              console.log(newList);
             }
           }
           return newList;
         });
 
-        setPage((prevPage) => prevPage + 1);
+        setPage(prevPage => prevPage + 1);
 
         if (selectedAnswer.idx + 1 === testList.length) {
           setMbti();
@@ -58,10 +71,14 @@ function Test() {
     // 결과 값에 따라 mbti로 계산해준다.
   }
 
+  useEffect(() => {
+    console.log('Current selectedAnswerIndices:', selectedAnswerIndices);
+  }, [selectedAnswerIndices]);
+
   return (
     <TestWrapper>
       <ProgressIndicator page={page} lastPage={testList.length} />
-
+      <div onClick={handleGoBack}>뒤로가기</div>
       <div>
         {testList.map((val, idx) => (
           <div key={idx} style={{ display: page === idx ? "block" : "none" }}>
@@ -74,8 +91,9 @@ function Test() {
               {val.a.map((aval, aidx) => (
                 <SelectBox
                   key={aidx}
-                  onClick={() => handleAnswer(aval.type, aval.count, page)}
+                  onClick={() => handleAnswer(aval.type, aval.count, aidx)}
                   text={aval.text}
+                  isSelected={selectedAnswerIndices[page] === aidx}
                 />
               ))}
             </TestAnswerWrapper>
@@ -125,32 +143,6 @@ const TestAnswerWrapper = styled.div`
   align-items: center;
   gap: 2.4rem;
   margin-top: 69px;
-`;
-
-const ProgressWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 2.5rem;
-
-  margin-top: 4.3rem;
-  margin-bottom: 6.7rem;
-  color: ${({ theme }) => theme.colors.w01};
-  ${({ theme }) => theme.fonts.M3_title_large}
-`;
-
-const ProgressBar = styled.div`
-  width: 90rem;
-  height: 1.8rem;
-  border-radius: 6.4rem;
-  background-color: ${({ theme }) => theme.colors.g04};
-`;
-
-const Progress = styled.div`
-  width: ${(props) => props.step};
-  height: 1.8rem;
-  border-radius: 6.4rem;
-  background-color: ${({ theme }) => theme.colors.w02};
 `;
 
 const BtnWrapper = styled.div`
