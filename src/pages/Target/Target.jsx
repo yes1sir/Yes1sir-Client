@@ -2,14 +2,12 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import SelectBox from "../../components/Target/SelectBox";
 import selectTarget from "../../constants/Target/selectTarget";
-import ArrowBackIcon from "@/assets/svgs/arrow_back.svg?react";
+import Backspace from "../../components/common/Backspace";
 
 function Target() {
   return (
     <TargetWrapper>
-      <IconWrapper to="/age">
-        <ArrowBackIcon />
-      </IconWrapper>
+      <Backspace />
 
       <TextWrapper>
         <TargetHeadline>피부 목표를 설정해주세요</TargetHeadline>
@@ -36,13 +34,6 @@ const TargetWrapper = styled.div`
 
   color: ${({ theme }) => theme.colors.w01};
   background-color: ${({ theme }) => theme.colors.b01};
-`;
-
-const IconWrapper = styled(Link)`
-  display: flex;
-  width: 100%;
-  padding-left: 50px;
-  padding-top: 23px;
 `;
 
 const TextWrapper = styled.div`
