@@ -11,25 +11,59 @@ function Test() {
   const [list, setList] = useState(typeSum);
   const [page, setPage] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
-
   const [selectedAnswerIndices, setSelectedAnswerIndices] = useState({});
 
+  // 선택된 답변 처리
   const handleAnswer = useCallback((type, count, idx) => {
     setSelectedAnswer({ type, count, idx });
-    setSelectedAnswerIndices(prev => ({ ...prev, [page]: idx }));
+
+    setSelectedAnswerIndices(prev => ({
+      ...prev,
+      [page]: idx
+    }));
   }, [page]);
 
+  // 뒤로가기 처리
   const handleGoBack = useCallback(() => {
     if (page > 0) {
-      setPage(prevPage => prevPage - 1);
-      setSelectedAnswerIndices(prev => {
-        const newSelectedAnswerIndices = { ...prev };
-        delete newSelectedAnswerIndices[page];
-        return newSelectedAnswerIndices;
+      // 현재 페이지를 이전 페이지로 업데이트
+      setPage((prevPage) => prevPage - 1);
+  
+      // 이전 페이지의 답변 제거 및 점수 조정
+      setList((prevList) => {
+        const newList = [...prevList];
+        const prevQuestion = testList[page - 1]; // 이전 페이지 질문
+        const prevAnswerIndex = selectedAnswerIndices[page - 1]; // 이전 페이지에서 선택된 답변의 인덱스
+  
+        if (prevQuestion) {
+          // 선택된 답변의 유형과 점수
+          const answerType = prevQuestion.a[prevAnswerIndex]?.type;
+          const answerCount = prevQuestion.a[prevAnswerIndex]?.count;
+  
+          // 점수 감소
+          for (let i = 0; i < newList.length; i++) {
+            if (answerType === newList[i].name) {
+              newList[i].sum -= answerCount;
+              console.log("지금 점수:", newList);
+              break;
+            }
+          }
+        }
+  
+        return newList;
+      });
+  
+      // 선택된 답변 인덱스도 업데이트
+      setSelectedAnswerIndices((prevIndices) => {
+        const newIndices = { ...prevIndices };
+        delete newIndices[page - 1];
+        return newIndices;
       });
     }
-  }, [page]);
+  }, [page, selectedAnswerIndices]);
+  
 
+  // 답변 선택 후 목록 업데이트 및 페이지 이동
   useEffect(() => {
     let timer;
     if (selectedAnswer) {
@@ -39,16 +73,19 @@ function Test() {
           for (let i = 0; i < newList.length; i++) {
             if (selectedAnswer.type === newList[i].name) {
               newList[i].sum += selectedAnswer.count;
+              console.log("지금 점수:", newList);
             }
           }
           return newList;
         });
 
-        setPage(prevPage => prevPage + 1);
-
-        if (selectedAnswer.idx + 1 === testList.length) {
-          setMbti();
-        }
+        setPage(prevPage => {
+          const nextPage = prevPage + 1;
+          if (nextPage >= testList.length) {
+            setMbti(); // 모든 질문이 완료되면 MBTI 계산
+          }
+          return nextPage;
+        });
 
         setSelectedAnswer(null);
       }, 200);
@@ -61,6 +98,7 @@ function Test() {
     };
   }, [selectedAnswer]);
 
+  // MBTI 계산 함수
   function setMbti() {
     let DorO = list[0].sum <= 6 ? "O" : "D";
     let RorS = list[1].sum <= 6 ? "S" : "R";
