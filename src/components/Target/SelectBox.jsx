@@ -9,7 +9,10 @@ export default function SelectBox({ text, onClick }) {
 
   const handleClick = () => {
     setToggle(true);
-    onClick();
+    if (onClick) {
+      // onClick이 정의되어 있을 때만 호출
+      onClick();
+    }
   };
 
   return (
@@ -43,5 +46,5 @@ const BoxText = styled.p`
 
 SelectBox.propTypes = {
   text: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
 };
