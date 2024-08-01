@@ -1,4 +1,3 @@
-import { useState } from "react";
 import styled from "styled-components";
 import CheckBlankIcon from "@/assets/svgs/check_blank.svg?react";
 import CheckIcon from "@/assets/svgs/check.svg?react";
@@ -8,7 +7,6 @@ export default function SelectBox({ text, onClick, isSelected }) {
   const handleClick = () => {
     if (onClick) {
       onClick();
-      console.log(isSelected)
     }
   };
 
