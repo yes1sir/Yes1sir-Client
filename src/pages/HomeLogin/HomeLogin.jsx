@@ -19,12 +19,29 @@ function HomeLogin() {
     useState(initialMbtiCircle);
   const [mbtiContentText, setMbtiContentText] = useState(mbtiContent[skinType]);
   const [mbtiContentTitle, setMbtiContentTitle] = useState(mbtiTitle[skinType]);
+  const [selectedIndex, setSelectedIndex] = useState(null);
 
-  const handleMbtiClick = (circle) => {
-    setSelectedMbtiCircle(circle);
-    setMbtiContentText(mbtiContent[circle.text]);
-    setMbtiContentTitle(mbtiTitle[circle.text]);
+  const handleMbtiClick = (circle, index) => {
+    if (selectedIndex === index) {
+      setSelectedMbtiCircle(null);
+      setMbtiContentText("");
+      setMbtiContentTitle("");
+      setSelectedIndex(null);
+    } else {
+      setSelectedMbtiCircle(circle);
+      setMbtiContentText(mbtiContent[circle.text]);
+      setMbtiContentTitle(mbtiTitle[circle.text]);
+      setSelectedIndex(index);
+    }
   };
+
+  const content = selectedIndex !== null && selectedMbtiCircle && (
+    <HomeLoginMbtiContent
+      $bgColor={selectedMbtiCircle?.color}
+      content={mbtiContentText}
+      title={mbtiContentTitle}
+    />
+  );
 
   return (
     <HomeLoginWrapper>
@@ -38,11 +55,10 @@ function HomeLogin() {
         color="#FFF"
         text="다시 진단받기"
       />
-      <HomeLoginMbti onMbtiClick={handleMbtiClick} />
-      <HomeLoginMbtiContent
-        $bgColor={selectedMbtiCircle?.color}
-        content={mbtiContentText}
-        title={mbtiContentTitle}
+      <HomeLoginMbti
+        onMbtiClick={handleMbtiClick}
+        selectedIndex={selectedIndex}
+        content={content}
       />
     </HomeLoginWrapper>
   );

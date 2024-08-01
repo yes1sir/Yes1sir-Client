@@ -22,7 +22,6 @@ const HomeLoginMbtiContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 144rem;
-  height: 38.7rem;
   padding: 7.5rem 10rem;
   gap: 3.75rem;
   background-color: ${(props) => props.$bgColor};

@@ -1,19 +1,26 @@
+import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import mbtiCircles from "@/constants/HomeLogout/mbtiCircles";
 
-const HomeLoginMbti = ({ onMbtiClick }) => {
+const HomeLoginMbti = ({ onMbtiClick, selectedIndex, content }) => {
   return (
     <HomeLogoutMbtiWrapper>
       <HomeLogoutMbtiContainer>
         {mbtiCircles.map((circle, index) => (
-          <Circle
-            key={index}
-            color={circle.color}
-            onClick={() => onMbtiClick(circle)}
-          >
-            {circle.text}
-          </Circle>
+          <React.Fragment key={index}>
+            <Circle
+              color={circle.color}
+              onClick={() => onMbtiClick(circle, index)}
+            >
+              {circle.text}
+            </Circle>
+            {selectedIndex !== null &&
+              index % 4 === 3 &&
+              Math.floor(selectedIndex / 4) === Math.floor(index / 4) && (
+                <ContentWrapper>{content}</ContentWrapper>
+              )}
+          </React.Fragment>
         ))}
       </HomeLogoutMbtiContainer>
     </HomeLogoutMbtiWrapper>
@@ -22,6 +29,8 @@ const HomeLoginMbti = ({ onMbtiClick }) => {
 
 HomeLoginMbti.propTypes = {
   onMbtiClick: PropTypes.func.isRequired,
+  selectedIndex: PropTypes.number,
+  content: PropTypes.node,
 };
 
 export default HomeLoginMbti;
@@ -30,13 +39,14 @@ const HomeLogoutMbtiWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 75.6rem;
-  height: 75.6rem;
 `;
 
 const HomeLogoutMbtiContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  display: flex;
+  width: 144rem;
+  padding: 0 30rem;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 0.563rem;
 `;
 
@@ -52,4 +62,10 @@ const Circle = styled.div`
   color: ${({ theme }) => theme.colors.b01};
   background-color: ${({ theme }) => theme.colors.g01};
   cursor: pointer;
+  margin: 0.2815rem;
+`;
+
+const ContentWrapper = styled.div`
+  margin-top: 0.563rem;
+  text-align: center;
 `;
