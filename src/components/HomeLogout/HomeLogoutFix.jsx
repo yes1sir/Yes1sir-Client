@@ -22,8 +22,6 @@ export default HomeLogoutFix;
 const HomeLogoutFixContainer = styled.div`
   display: flex;
   position: fixed;
-  top: 20%;
-  left: 60%;
   align-items: center;
   justify-content: center;
   width: 35.5rem;
@@ -31,7 +29,8 @@ const HomeLogoutFixContainer = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 3rem;
-  margin-left: 10rem;
+  margin-left: 100rem;
+  margin-top: 10rem;
   padding-bottom: 8rem;
 `;
 

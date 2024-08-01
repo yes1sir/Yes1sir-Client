@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import HomeLoginTitle from "@/components/HomeLogin/HomeLoginTitle";
-import HomeLogoutMbti from "@/components/HomeLogout/HomeLogoutMbti";
+import HomeLoginMbti from "@/components/HomeLogin/HomeLoginMbti";
 import HomeLoginBtn from "@/components/common/HomeLoginBtn";
 import mbtiCircles from "@/constants/HomeLogout/mbtiCircles";
 import HomeLoginMbtiContent from "@/components/HomeLogin/HomeLoginMbtiContent";
@@ -38,7 +38,7 @@ function HomeLogin() {
         color="#FFF"
         text="다시 진단받기"
       />
-      <HomeLogoutMbti onMbtiClick={handleMbtiClick} />
+      <HomeLoginMbti onMbtiClick={handleMbtiClick} />
       <HomeLoginMbtiContent
         $bgColor={selectedMbtiCircle?.color}
         content={mbtiContentText}
