@@ -59,6 +59,7 @@ function HomeLogin() {
       <HomeLoginMbti
         onMbtiClick={handleMbtiClick}
         selectedIndex={selectedIndex}
+        selectedMbtiCircle={selectedMbtiCircle}
         content={content}
       />
     </HomeLoginWrapper>
