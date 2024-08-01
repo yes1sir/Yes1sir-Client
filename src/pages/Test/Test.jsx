@@ -58,7 +58,7 @@ function Test() {
     <TestWrapper>
       <ProgressWrapper>
         <ProgressBar>
-          <Progress />
+          <Progress style={{ width: 75 * (page + 1) }} />
         </ProgressBar>
         {page + 1} / {testList.length}
       </ProgressWrapper>
@@ -66,7 +66,9 @@ function Test() {
         {testList.map((val, idx) => (
           <div key={idx} style={{ display: page === idx ? "block" : "none" }}>
             {val.q.map((qval, qidx) => (
-              <TestQuestion key={qidx}>{page+1}. {qval}</TestQuestion>
+              <TestQuestion key={qidx}>
+                {page + 1}. {qval}
+              </TestQuestion>
             ))}
             <TestAnswerWrapper>
               {val.a.map((aval, aidx) => (
@@ -128,7 +130,7 @@ const ProgressBar = styled.div`
 `;
 
 const Progress = styled.div`
-  width: 7.5rem; // 나중에 변경
+  width: ${(props) => props.step};
   height: 1.8rem;
   border-radius: 6.4rem;
   background-color: ${({ theme }) => theme.colors.w02};

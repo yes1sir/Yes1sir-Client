@@ -37,6 +37,7 @@ const BoxWrapper = styled.div`
 
 const BoxText = styled.p`
   margin-left: 43px;
+  padding-right: 2rem;
   font-size: 2rem;
 `;
 
