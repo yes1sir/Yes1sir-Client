@@ -1,18 +1,27 @@
+import PropTypes from "prop-types";
 import styled from "styled-components";
 import mbtiCircles from "@/constants/HomeLogout/mbtiCircles";
 
-const HomeLogoutMbti = () => {
+const HomeLogoutMbti = ({ onMbtiClick }) => {
   return (
     <HomeLogoutMbtiWrapper>
       <HomeLogoutMbtiContainer>
         {mbtiCircles.map((circle, index) => (
-          <Circle key={index} color={circle.color}>
+          <Circle
+            key={index}
+            color={circle.color}
+            onClick={() => onMbtiClick(circle)}
+          >
             {circle.text}
           </Circle>
         ))}
       </HomeLogoutMbtiContainer>
     </HomeLogoutMbtiWrapper>
   );
+};
+
+HomeLogoutMbti.propTypes = {
+  onMbtiClick: PropTypes.func.isRequired,
 };
 
 export default HomeLogoutMbti;
@@ -42,4 +51,5 @@ const Circle = styled.div`
   ${({ theme }) => theme.fonts.M3_content_large};
   color: ${({ theme }) => theme.colors.b01};
   background-color: ${({ theme }) => theme.colors.g01};
+  cursor: pointer;
 `;

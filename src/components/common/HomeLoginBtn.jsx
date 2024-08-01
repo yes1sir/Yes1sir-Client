@@ -3,9 +3,9 @@ import { homeLoginBtnPropTypes } from "@/types/homeLoginBtnPropTypes";
 
 HomeLoginBtn.propTypes = homeLoginBtnPropTypes;
 
-function HomeLoginBtn({ backgroundcolor, color, text }) {
+function HomeLoginBtn({ backgroundColor, color, text }) {
   return (
-    <HomeLoginBtnBox backgroundcolor={backgroundcolor} color={color}>
+    <HomeLoginBtnBox $backgroundcolor={backgroundColor} color={color}>
       {text}
     </HomeLoginBtnBox>
   );
@@ -21,7 +21,7 @@ const HomeLoginBtnBox = styled.button`
   padding: 1rem 2.4rem;
   justify-content: center;
   align-items: center;
-  background-color: ${({ backgroundcolor }) => backgroundcolor};
+  background-color: ${({ $backgroundcolor }) => $backgroundcolor};
   color: ${({ color }) => color};
   ${({ theme }) => theme.fonts.M3_title_large};
 `;

@@ -1,4 +1,4 @@
-import { styled } from "styled-components";
+import styled from "styled-components";
 import PropTypes from "prop-types";
 
 HomeLoginTitle.propTypes = {
@@ -24,7 +24,9 @@ const Title = styled.h1`
   margin-top: 12.3rem;
 `;
 
-const SkinTypeSpan = styled.span`
-  color: ${({ textColor }) => textColor};
+const SkinTypeSpan = styled.span.withConfig({
+  shouldForwardProp: (prop) => prop !== "textColor",
+})`
   ${({ theme }) => theme.fonts.M3_title_normal};
+  color: ${({ textColor }) => textColor};
 `;
