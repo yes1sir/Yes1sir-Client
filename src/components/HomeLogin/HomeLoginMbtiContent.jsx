@@ -1,8 +1,15 @@
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import HomeLoginBtn from "@/components/common/HomeLoginBtn";
 
 function HomeLoginMbtiContent({ $bgColor, content, title }) {
+  const navigate = useNavigate();
+
+  const handleLoginClick = () => {
+    navigate("/Recommend");
+  };
+
   return (
     <HomeLoginMbtiContentWrapper $bgColor={$bgColor}>
       <ContentTitle>{title}</ContentTitle>
@@ -12,6 +19,7 @@ function HomeLoginMbtiContent({ $bgColor, content, title }) {
           backgroundColor="#FFF"
           color="black"
           text="제품 추천 받기"
+          onClick={handleLoginClick}
         />
       </HomeLoginBtnContainer>
     </HomeLoginMbtiContentWrapper>
