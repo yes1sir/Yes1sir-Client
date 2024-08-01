@@ -84,6 +84,14 @@ const fonts = {
     line-height: 45px; /* 150% */
     letter-spacing: var(--Title-Small-Tracking, 0.1px);
   `,
+  M3_content_xxsmall: css`
+    font-family: var(--Headline-Large-Font, Roboto);
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: var(--Headline-Large-Line-Height, 40px); /* 166.667% */
+    letter-spacing: var(--Headline-Large-Tracking, 0px);
+  `,
 };
 
 const theme = {

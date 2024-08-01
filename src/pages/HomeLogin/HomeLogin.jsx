@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
 import HomeLoginTitle from "@/components/HomeLogin/HomeLoginTitle";
 import HomeLoginMbti from "@/components/HomeLogin/HomeLoginMbti";
 import HomeLoginBtn from "@/components/common/HomeLoginBtn";
@@ -25,8 +24,6 @@ function HomeLogin() {
   const [mbtiContentTitle, setMbtiContentTitle] = useState(mbtiTitle[skinType]);
   const [selectedIndex, setSelectedIndex] = useState(initialIndex);
 
-  const navigate = useNavigate();
-
   useEffect(() => {
     setSelectedMbtiCircle(mbtiCircles[initialIndex]);
     setMbtiContentText(mbtiContent[skinType]);
@@ -42,15 +39,12 @@ function HomeLogin() {
     setSelectedIndex(isSelected ? null : index);
   };
 
-  const handleBtnClick = () => {
-    navigate("/Test");
-  };
-
   const content = selectedIndex !== null && selectedMbtiCircle && (
     <HomeLoginMbtiContent
       $bgColor={selectedMbtiCircle?.color}
       content={mbtiContentText}
       title={mbtiContentTitle}
+      skinType={selectedMbtiCircle.text}
     />
   );
 
@@ -65,7 +59,6 @@ function HomeLogin() {
         backgroundColor="#42A5C4"
         color="#FFF"
         text="다시 진단받기"
-        onClick={handleBtnClick}
       />
       <HomeLoginMbti
         onMbtiClick={handleMbtiClick}
