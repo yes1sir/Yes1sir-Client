@@ -1,8 +1,12 @@
 import { useState, useCallback, useEffect } from "react";
 import styled from "styled-components";
 import SelectBox from "../../components/Target/SelectBox";
+import HomeLoginBtn from "../../components/common/HomeLoginBtn";
+
 import testList from "@/constants/Test/testList";
 import typeSum from "@/constants/Test/typeSum";
+import ProgressIndicator from "../../components/Test/ProgressIndicator";
+
 function Test() {
   const [list, setList] = useState(typeSum);
   const [page, setPage] = useState(0);
@@ -34,7 +38,7 @@ function Test() {
         }
 
         setSelectedAnswer(null);
-      }, 500);
+      }, 200);
     }
 
     return () => {
@@ -56,12 +60,8 @@ function Test() {
 
   return (
     <TestWrapper>
-      <ProgressWrapper>
-        <ProgressBar>
-          <Progress style={{ width: 75 * (page + 1) }} />
-        </ProgressBar>
-        {page + 1} / {testList.length}
-      </ProgressWrapper>
+      <ProgressIndicator page={page} lastPage={testList.length} />
+
       <div>
         {testList.map((val, idx) => (
           <div key={idx} style={{ display: page === idx ? "block" : "none" }}>
@@ -82,6 +82,23 @@ function Test() {
           </div>
         ))}
       </div>
+
+      {page >= testList.length ? (
+        <BtnWrapper>
+          <HomeLoginBtn
+            backgroundColor="#FFF"
+            color="#2E2856"
+            text="결과 보기"
+          />
+          <HomeLoginBtn
+            backgroundColor="#FFF"
+            color="#2E2856"
+            text="추천 제품 보기"
+          />
+        </BtnWrapper>
+      ) : (
+        <div></div>
+      )}
     </TestWrapper>
   );
 }
@@ -134,4 +151,11 @@ const Progress = styled.div`
   height: 1.8rem;
   border-radius: 6.4rem;
   background-color: ${({ theme }) => theme.colors.w02};
+`;
+
+const BtnWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 13rem;
 `;
