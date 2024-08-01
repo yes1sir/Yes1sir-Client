@@ -1,7 +1,5 @@
 import styled from "styled-components";
-
 import PropTypes from "prop-types";
-
 import customIngredients from "@/constants/Recommend/customIngredient";
 import avoidIngredients from "@/constants/Recommend/avoidIngredient";
 
@@ -12,12 +10,8 @@ RecommendIngredient.propTypes = {
 function RecommendIngredient({ skinType }) {
   return (
     <RecommendIngredientWrapper>
-      <CustomIngredient skinType={skinType}>
-        {customIngredients[skinType]}
-      </CustomIngredient>
-      <AvoidIngredient skinType={skinType}>
-        {avoidIngredients[skinType]}
-      </AvoidIngredient>
+      <CustomIngredient>{customIngredients[skinType]}</CustomIngredient>
+      <AvoidIngredient>{avoidIngredients[skinType]}</AvoidIngredient>
     </RecommendIngredientWrapper>
   );
 }

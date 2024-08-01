@@ -22,6 +22,7 @@ function HomeLogin() {
     useState(initialMbtiCircle);
   const [mbtiContentText, setMbtiContentText] = useState(mbtiContent[skinType]);
   const [mbtiContentTitle, setMbtiContentTitle] = useState(mbtiTitle[skinType]);
+
   const [selectedIndex, setSelectedIndex] = useState(initialIndex);
 
   useEffect(() => {
@@ -30,12 +31,12 @@ function HomeLogin() {
     setMbtiContentTitle(mbtiTitle[skinType]);
     setSelectedIndex(initialIndex);
   }, [initialIndex, skinType]);
-
   const handleMbtiClick = (circle, index) => {
     const isSelected = selectedIndex === index;
     setSelectedMbtiCircle(isSelected ? null : circle);
     setMbtiContentText(isSelected ? "" : mbtiContent[circle.text]);
     setMbtiContentTitle(isSelected ? "" : mbtiTitle[circle.text]);
+
     setSelectedIndex(isSelected ? null : index);
   };
 

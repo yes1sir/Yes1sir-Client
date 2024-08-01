@@ -3,6 +3,7 @@ import { css } from "styled-components";
 const colors = {
   b01: "#2E2856",
   b02: "#454545",
+  b03: "#42A5C4",
 
   w01: "#FFF",
   w02: "#EAE7F9",
@@ -36,6 +37,13 @@ const fonts = {
     font-weight: 500;
     line-height: normal;
     letter-spacing: 3.5px;
+  `,
+  M3_title_xlarge: css`
+    font-family: Inter;
+    font-size: 64px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
   `,
   M3_title_large: css`
     font-family: var(--Title-Large-Font, Roboto);

@@ -7,7 +7,7 @@ function HomeLoginMbtiContent({ $bgColor, content, title, skinType }) {
   const navigate = useNavigate();
 
   const handleLoginClick = () => {
-    navigate("/Recommend", { state: { title, skinType } });
+    navigate("/Recommend", { state: { title, skinType, $bgColor } });
   };
 
   return (
