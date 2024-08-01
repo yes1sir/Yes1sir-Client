@@ -1,24 +1,85 @@
+import { useState, useCallback, useEffect } from "react";
 import styled from "styled-components";
 import SelectBox from "../../components/Target/SelectBox";
-
+import testList from "@/constants/Test/testList";
+import typeSum from "@/constants/Test/typeSum";
 function Test() {
+  const [list, setList] = useState(typeSum);
+  const [page, setPage] = useState(0);
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
+
+  const handleAnswer = useCallback((type, count, idx) => {
+    setSelectedAnswer({ type, count, idx });
+  }, []);
+
+  useEffect(() => {
+    let timer;
+    if (selectedAnswer) {
+      timer = setTimeout(() => {
+        setList((prevList) => {
+          const newList = [...prevList];
+          for (let i = 0; i < newList.length; i++) {
+            if (selectedAnswer.type === newList[i].name) {
+              newList[i].sum += selectedAnswer.count;
+              console.log(newList);
+            }
+          }
+          return newList;
+        });
+
+        setPage((prevPage) => prevPage + 1);
+
+        if (selectedAnswer.idx + 1 === testList.length) {
+          setMbti();
+        }
+
+        setSelectedAnswer(null);
+      }, 500);
+    }
+
+    return () => {
+      if (timer) {
+        clearTimeout(timer);
+      }
+    };
+  }, [selectedAnswer]);
+
+  function setMbti() {
+    let DorO = list[0].sum <= 6 ? "O" : "D";
+    let RorS = list[1].sum <= 6 ? "S" : "R";
+    let PorN = list[2].sum <= 6 ? "N" : "P";
+    let TorW = list[3].sum <= 6 ? "W" : "T";
+    let mbti = DorO + RorS + PorN + TorW;
+    console.log("결과:", mbti);
+    // 결과 값에 따라 mbti로 계산해준다.
+  }
+
   return (
     <TestWrapper>
       <ProgressWrapper>
         <ProgressBar>
           <Progress />
         </ProgressBar>
-        1/12
+        {page + 1} / {testList.length}
       </ProgressWrapper>
-      <TestQuestion>
-        1. 세안 후에 아무것도 바르지 않으면 당신의 피부는 어떻습니까?
-      </TestQuestion>
-      <TestAnswerWrapper>
-        <SelectBox text={"매우 건조하다"} />
-        <SelectBox text={"건조하다"} />
-        <SelectBox text={"그냥 그렇다"} />
-        <SelectBox text={"윤기가 있다"} />
-      </TestAnswerWrapper>
+      <div>
+        {testList.map((val, idx) => (
+          <div key={idx} style={{ display: page === idx ? "block" : "none" }}>
+            {val.q.map((qval, qidx) => (
+              <TestQuestion key={qidx}>{page+1}. {qval}</TestQuestion>
+            ))}
+            <TestAnswerWrapper>
+              {val.a.map((aval, aidx) => (
+                <SelectBox
+                  key={aidx}
+                  onClick={() => handleAnswer(aval.type, aval.count, page)}
+                  text={aval.text}
+                />
+              ))}
+            </TestAnswerWrapper>
+          </div>
+        ))}
+      </div>
     </TestWrapper>
   );
 }
@@ -34,6 +95,7 @@ const TestWrapper = styled.div`
 `;
 
 const TestQuestion = styled.div`
+  text-align: center;
   color: ${({ theme }) => theme.colors.w01};
   ${({ theme }) => theme.fonts.M3_headline_large};
 `;

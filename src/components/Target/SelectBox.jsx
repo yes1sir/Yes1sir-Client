@@ -1,14 +1,19 @@
+import { useState } from "react";
 import styled from "styled-components";
 import CheckBlankIcon from "@/assets/svgs/check_blank.svg?react";
 import CheckIcon from "@/assets/svgs/check.svg?react";
 import PropTypes from "prop-types";
-import { useState } from "react";
 
-export default function SelectBox({ text }) {
+export default function SelectBox({ text, onClick }) {
   const [toggle, setToggle] = useState(false);
 
+  const handleClick = () => {
+    setToggle(true);
+    onClick();
+  };
+
   return (
-    <BoxWrapper onClick={() => setToggle(!toggle)}>
+    <BoxWrapper onClick={handleClick}>
       {toggle ? <CheckIcon /> : <CheckBlankIcon />}
       <BoxText>{text}</BoxText>
     </BoxWrapper>
@@ -27,6 +32,7 @@ const BoxWrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.w02};
 
   color: ${({ theme }) => theme.colors.b01};
+  cursor: pointer;
 `;
 
 const BoxText = styled.p`
@@ -36,4 +42,5 @@ const BoxText = styled.p`
 
 SelectBox.propTypes = {
   text: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
