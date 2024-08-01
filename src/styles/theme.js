@@ -10,6 +10,7 @@ const colors = {
   g01: "#C2C2C9",
   g02: "#c4c1d8",
   g03: "#8b8b8b",
+  g04: "#8E8AAC",
 };
 
 const fonts = {
