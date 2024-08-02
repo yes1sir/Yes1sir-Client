@@ -1,8 +1,8 @@
 import { useState, useCallback, useEffect } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 import SelectBox from "../../components/Target/SelectBox";
-import HomeLoginBtn from "../../components/common/HomeLoginBtn";
 import ProgressIndicator from "../../components/Test/ProgressIndicator";
 
 import testList from "@/constants/Test/testList";
@@ -10,10 +10,17 @@ import typeSum from "@/constants/Test/typeSum";
 import ArrowBackIcon from "@/assets/svgs/arrow_back.svg?react";
 
 function Test() {
+  const nav = useNavigate();
   const [list, setList] = useState(typeSum);
   const [page, setPage] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [selectedAnswerIndices, setSelectedAnswerIndices] = useState({});
+
+  // 페이지가 처음 로드될 때 typeSum을 초기화
+  useEffect(() => {
+    const resetTypeSum = typeSum.map((item) => ({ ...item, sum: 0 }));
+    setList(resetTypeSum);
+  }, []);
 
   // 선택된 답변 처리
   const handleAnswer = useCallback(
@@ -87,6 +94,7 @@ function Test() {
           const nextPage = prevPage + 1;
           if (nextPage >= testList.length) {
             setMbti(); // 모든 질문이 완료되면 MBTI 계산
+            nav("/homelogin");
           }
           return nextPage;
         });
@@ -110,12 +118,7 @@ function Test() {
     let TorW = list[3].sum <= 6 ? "W" : "T";
     let mbti = DorO + RorS + PorN + TorW;
     console.log("결과:", mbti);
-    // 결과 값에 따라 mbti로 계산해준다.
   }
-
-  useEffect(() => {
-    console.log("Current selectedAnswerIndices:", selectedAnswerIndices);
-  }, [selectedAnswerIndices]);
 
   return (
     <TestWrapper>
@@ -128,44 +131,26 @@ function Test() {
       )}
 
       <ProgressIndicator page={page} lastPage={testList.length} />
-      <div>
-        {testList.map((val, idx) => (
-          <div key={idx} style={{ display: page === idx ? "block" : "none" }}>
-            {val.q.map((qval, qidx) => (
-              <TestQuestion key={qidx}>
-                {page + 1}. {qval}
-              </TestQuestion>
-            ))}
-            <TestAnswerWrapper>
-              {val.a.map((aval, aidx) => (
-                <SelectBox
-                  key={aidx}
-                  onClick={() => handleAnswer(aval.type, aval.count, aidx)}
-                  text={aval.text}
-                  isSelected={selectedAnswerIndices[page] === aidx}
-                />
-              ))}
-            </TestAnswerWrapper>
-          </div>
-        ))}
-      </div>
 
-      {page >= testList.length ? (
-        <BtnWrapper>
-          <HomeLoginBtn
-            backgroundColor="#FFF"
-            color="#2E2856"
-            text="결과 보기"
-          />
-          <HomeLoginBtn
-            backgroundColor="#FFF"
-            color="#2E2856"
-            text="추천 제품 보기"
-          />
-        </BtnWrapper>
-      ) : (
-        <div></div>
-      )}
+      {testList.map((val, idx) => (
+        <div key={idx} style={{ display: page === idx ? "block" : "none" }}>
+          {val.q.map((qval, qidx) => (
+            <TestQuestion key={qidx}>
+              {page + 1}. {qval}
+            </TestQuestion>
+          ))}
+          <TestAnswerWrapper>
+            {val.a.map((aval, aidx) => (
+              <SelectBox
+                key={aidx}
+                onClick={() => handleAnswer(aval.type, aval.count, aidx)}
+                text={aval.text}
+                isSelected={selectedAnswerIndices[page] === aidx}
+              />
+            ))}
+          </TestAnswerWrapper>
+        </div>
+      ))}
     </TestWrapper>
   );
 }
@@ -203,11 +188,4 @@ const TestAnswerWrapper = styled.div`
   align-items: center;
   gap: 2.4rem;
   margin-top: 69px;
-`;
-
-const BtnWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 13rem;
 `;
