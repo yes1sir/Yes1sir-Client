@@ -64,6 +64,16 @@ function Test() {
     }
   }, [page, selectedAnswerIndices]);
 
+  const setMbti = useCallback(() => {
+    let DorO = list[0].sum <= 6 ? "O" : "D";
+    let RorS = list[1].sum <= 6 ? "S" : "R";
+    let PorN = list[2].sum <= 6 ? "N" : "P";
+    let TorW = list[3].sum <= 6 ? "W" : "T";
+    let mbti = DorO + RorS + PorN + TorW;
+    // console.log("결과:", mbti);
+    nav("/homelogin");
+  }, [list, nav]);
+
   useEffect(() => {
     let timer;
     if (selectedAnswer) {
@@ -95,17 +105,7 @@ function Test() {
         clearTimeout(timer);
       }
     };
-  }, [selectedAnswer]);
-
-  function setMbti() {
-    let DorO = list[0].sum <= 6 ? "O" : "D";
-    let RorS = list[1].sum <= 6 ? "S" : "R";
-    let PorN = list[2].sum <= 6 ? "N" : "P";
-    let TorW = list[3].sum <= 6 ? "W" : "T";
-    let mbti = DorO + RorS + PorN + TorW;
-    // console.log("결과:", mbti);
-    nav("/homelogin");
-  }
+  }, [selectedAnswer, setMbti]);
 
   return (
     <TestWrapper>
