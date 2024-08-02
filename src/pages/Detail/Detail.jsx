@@ -1,11 +1,13 @@
 import styled from "styled-components";
 
 import DetailTop from "@/components/Detail/DetailTop";
+import DetailMiddle from "@/components/Detail/DetailMiddle";
 
 function Detail() {
   return (
     <DetailWrapper>
       <DetailTop />
+      <DetailMiddle />
     </DetailWrapper>
   );
 }

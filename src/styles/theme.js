@@ -124,6 +124,14 @@ const fonts = {
     line-height: 120%; /* 28.8px */
     letter-spacing: -0.48px;
   `,
+  M3_detail_large: css`
+    font-family: var(--Headline-Large-Font, Roboto);
+    font-size: var(--Headline-Large-Size, 32px);
+    font-style: normal;
+    font-weight: 500;
+    line-height: var(--Headline-Large-Line-Height, 40px); /* 125% */
+    letter-spacing: var(--Headline-Large-Tracking, 0px);
+  `,
   M3_detail_normal: css`
     font-family: var(--Headline-Large-Font, Roboto);
     font-size: var(--Headline-Large-Size, 32px);
@@ -138,6 +146,13 @@ const fonts = {
     font-style: normal;
     font-weight: 400;
     line-height: var(--Headline-Large-Line-Height, 40px); /* 125% */
+    letter-spacing: var(--Headline-Large-Tracking, 0px);
+  `,
+  M3_detail_small: css`
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: var(--Headline-Large-Line-Height, 40px); /* 166.667% */
     letter-spacing: var(--Headline-Large-Tracking, 0px);
   `,
 };
