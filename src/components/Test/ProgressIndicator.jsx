@@ -20,14 +20,16 @@ const ProgressWrapper = styled.div`
 
   margin-top: 4.3rem;
   margin-bottom: 6.7rem;
+
   color: ${({ theme }) => theme.colors.w01};
-  ${({ theme }) => theme.fonts.M3_title_large}
+  ${({ theme }) => theme.fonts.M3_title_large};
 `;
 
 const ProgressBar = styled.div`
   width: 90rem;
   height: 1.8rem;
   border-radius: 6.4rem;
+
   background-color: ${({ theme }) => theme.colors.g04};
 `;
 
@@ -35,6 +37,7 @@ const Progress = styled.div`
   width: ${(props) => props.step};
   height: 1.8rem;
   border-radius: 6.4rem;
+
   background-color: ${({ theme }) => theme.colors.w02};
 `;
 
