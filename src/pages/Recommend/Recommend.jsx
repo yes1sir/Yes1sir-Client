@@ -44,9 +44,10 @@ const RecommendTopContainer = styled.div`
   justify-content: center;
   width: 144rem;
   height: 70rem;
-  padding: 6.1rem 13.8rem;
+  padding: 6.1rem 10rem;
   background-image: url("src/assets/images/bg.png");
   background-size: cover;
+  gap: 8rem;
 `;
 
 const RecommendType = styled.p`

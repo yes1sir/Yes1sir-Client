@@ -20,6 +20,7 @@ export default RecommendIngredient;
 
 const RecommendIngredientWrapper = styled.div`
   display: flex;
+  width: 69rem;
   gap: 2rem;
   flex-direction: column;
 `;
