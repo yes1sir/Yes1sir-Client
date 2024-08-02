@@ -124,6 +124,22 @@ const fonts = {
     line-height: 120%; /* 28.8px */
     letter-spacing: -0.48px;
   `,
+  M3_detail_normal: css`
+    font-family: var(--Headline-Large-Font, Roboto);
+    font-size: var(--Headline-Large-Size, 32px);
+    font-style: normal;
+    font-weight: 400;
+    line-height: var(--Headline-Large-Line-Height, 40px); /* 125% */
+    letter-spacing: var(--Headline-Large-Tracking, 0px);
+  `,
+  M3_detail_xnormal: css`
+    font-family: var(--Headline-Large-Font, Roboto);
+    font-size: var(--Headline-Large-Size, 32px);
+    font-style: normal;
+    font-weight: 400;
+    line-height: var(--Headline-Large-Line-Height, 40px); /* 125% */
+    letter-spacing: var(--Headline-Large-Tracking, 0px);
+  `,
 };
 
 const theme = {
