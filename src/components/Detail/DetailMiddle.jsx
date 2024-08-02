@@ -1,16 +1,23 @@
-import { styled } from "styled-components";
+import PropTypes from "prop-types";
+import styled from "styled-components";
 
-function DetailMiddle() {
+function DetailMiddle({ onReviewButtonClick }) {
   return (
     <DetailMiddleBox>
       <ReviewContainer>
         <ReviewText>리뷰</ReviewText>
         <ReviewNumber>(21)</ReviewNumber>
       </ReviewContainer>
-      <ReviewPostBtn>작성하기 &#62;</ReviewPostBtn>
+      <ReviewPostBtn onClick={onReviewButtonClick}>
+        작성하기 &#62;
+      </ReviewPostBtn>
     </DetailMiddleBox>
   );
 }
+
+DetailMiddle.propTypes = {
+  onReviewButtonClick: PropTypes.func.isRequired,
+};
 
 export default DetailMiddle;
 

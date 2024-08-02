@@ -12,6 +12,7 @@ const colors = {
   g02: "#c4c1d8",
   g03: "#8b8b8b",
   g04: "#8E8AAC",
+  g05: "#E5E5ED",
 };
 
 const fonts = {
@@ -154,6 +155,22 @@ const fonts = {
     font-weight: 300;
     line-height: var(--Headline-Large-Line-Height, 40px); /* 166.667% */
     letter-spacing: var(--Headline-Large-Tracking, 0px);
+  `,
+  M3_modal_normal: css`
+    font-family: Inter;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 4px;
+  `,
+  M3_modal_small: css`
+    font-family: Inter;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 3.2px;  
   `,
 };
 
