@@ -13,6 +13,8 @@ const colors = {
   g03: "#8b8b8b",
   g04: "#8E8AAC",
   g05: "#E5E5ED",
+  g06: "#5E5E5E",
+  g07: "#D4D4D9",
 };
 
 const fonts = {
@@ -170,7 +172,23 @@ const fonts = {
     font-style: normal;
     font-weight: 500;
     line-height: normal;
-    letter-spacing: 3.2px;  
+    letter-spacing: 3.2px;
+  `,
+  M3_name_small: css`
+    font-family: Inter;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 1.8px;
+  `,
+  M3_date_small: css`
+    font-family: Inter;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 1.8px;
   `,
 };
 

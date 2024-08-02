@@ -1,14 +1,26 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 
 ReviewModal.propTypes = {
   onClose: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  review: PropTypes.shape({
+    text: PropTypes.string,
+    image: PropTypes.string,
+  }),
 };
 
-function ReviewModal({ onClose }) {
+function ReviewModal({ onClose, onSubmit, review }) {
   const [text, setText] = useState("");
   const [image, setImage] = useState(null);
+
+  useEffect(() => {
+    if (review) {
+      setText(review.text);
+      setImage(review.image);
+    }
+  }, [review]);
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
@@ -16,10 +28,13 @@ function ReviewModal({ onClose }) {
       const reader = new FileReader();
       reader.onloadend = () => {
         setImage(reader.result);
-        setText((prevText) => `${prevText}\n[이미지 첨부: ${file.name}]`);
       };
       reader.readAsDataURL(file);
     }
+  };
+
+  const handleSubmit = () => {
+    onSubmit(text, image);
   };
 
   return (
@@ -54,12 +69,13 @@ function ReviewModal({ onClose }) {
           </UploadContainer>
         </ImageUpload>
         <SubmitButtonBox>
-          <SubmitButton>제출하기</SubmitButton>
+          <SubmitButton onClick={handleSubmit}>제출하기</SubmitButton>
         </SubmitButtonBox>
       </ModalContent>
     </ModalOverlay>
   );
 }
+
 export default ReviewModal;
 
 const ModalOverlay = styled.div`
