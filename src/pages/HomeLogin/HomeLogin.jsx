@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
 import HomeLoginTitle from "@/components/HomeLogin/HomeLoginTitle";
 import HomeLoginMbti from "@/components/HomeLogin/HomeLoginMbti";
 import HomeLoginBtn from "@/components/common/HomeLoginBtn";
@@ -23,9 +22,8 @@ function HomeLogin() {
     useState(initialMbtiCircle);
   const [mbtiContentText, setMbtiContentText] = useState(mbtiContent[skinType]);
   const [mbtiContentTitle, setMbtiContentTitle] = useState(mbtiTitle[skinType]);
-  const [selectedIndex, setSelectedIndex] = useState(initialIndex);
 
-  const navigate = useNavigate();
+  const [selectedIndex, setSelectedIndex] = useState(initialIndex);
 
   useEffect(() => {
     setSelectedMbtiCircle(mbtiCircles[initialIndex]);
@@ -33,17 +31,13 @@ function HomeLogin() {
     setMbtiContentTitle(mbtiTitle[skinType]);
     setSelectedIndex(initialIndex);
   }, [initialIndex, skinType]);
-
   const handleMbtiClick = (circle, index) => {
     const isSelected = selectedIndex === index;
     setSelectedMbtiCircle(isSelected ? null : circle);
     setMbtiContentText(isSelected ? "" : mbtiContent[circle.text]);
     setMbtiContentTitle(isSelected ? "" : mbtiTitle[circle.text]);
-    setSelectedIndex(isSelected ? null : index);
-  };
 
-  const handleBtnClick = () => {
-    navigate("/Test");
+    setSelectedIndex(isSelected ? null : index);
   };
 
   const content = selectedIndex !== null && selectedMbtiCircle && (
@@ -51,6 +45,7 @@ function HomeLogin() {
       $bgColor={selectedMbtiCircle?.color}
       content={mbtiContentText}
       title={mbtiContentTitle}
+      skinType={selectedMbtiCircle.text}
     />
   );
 
@@ -65,7 +60,6 @@ function HomeLogin() {
         backgroundColor="#42A5C4"
         color="#FFF"
         text="다시 진단받기"
-        onClick={handleBtnClick}
       />
       <HomeLoginMbti
         onMbtiClick={handleMbtiClick}

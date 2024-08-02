@@ -3,11 +3,11 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import HomeLoginBtn from "@/components/common/HomeLoginBtn";
 
-function HomeLoginMbtiContent({ $bgColor, content, title }) {
+function HomeLoginMbtiContent({ $bgColor, content, title, skinType }) {
   const navigate = useNavigate();
 
   const handleLoginClick = () => {
-    navigate("/Recommend");
+    navigate("/Recommend", { state: { title, skinType, $bgColor } });
   };
 
   return (
@@ -30,6 +30,7 @@ HomeLoginMbtiContent.propTypes = {
   $bgColor: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
+  skinType: PropTypes.string.isRequired,
 };
 
 export default HomeLoginMbtiContent;

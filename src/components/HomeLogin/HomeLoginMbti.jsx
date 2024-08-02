@@ -3,12 +3,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import mbtiCircles from "@/constants/HomeLogout/mbtiCircles";
 
-const HomeLoginMbti = ({
-  onMbtiClick,
-  selectedIndex,
-  selectedMbtiCircle,
-  content,
-}) => {
+const HomeLoginMbti = ({ onMbtiClick, selectedIndex, content }) => {
   return (
     <HomeLogoutMbtiWrapper>
       <HomeLogoutMbtiContainer>
@@ -16,9 +11,8 @@ const HomeLoginMbti = ({
           <React.Fragment key={index}>
             <Circle
               color={circle.color}
-              isSelected={selectedIndex === index}
+              $isSelected={selectedIndex === index}
               onClick={() => onMbtiClick(circle, index)}
-              selectedColor={selectedMbtiCircle?.color}
             >
               {circle.text}
             </Circle>
@@ -69,7 +63,7 @@ const Circle = styled.div`
   ${({ theme }) => theme.fonts.M3_content_large};
   color: ${({ theme }) => theme.colors.b01};
   background-color: ${(props) =>
-    props.isSelected ? props.color : props.theme.colors.g01};
+    props.$isSelected ? props.color : props.theme.colors.g01};
   cursor: pointer;
   margin: 0.2815rem;
 `;
