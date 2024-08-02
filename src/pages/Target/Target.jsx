@@ -1,10 +1,23 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import SelectBox from "../../components/Target/SelectBox";
-import selectTarget from "../../constants/Target/selectTarget";
+import selectTargetData from "../../constants/Target/selectTarget";
 import Backspace from "../../components/common/Backspace";
+import { useState } from "react";
 
 function Target() {
+  // selectTargetData를 상태로 관리
+  const [selectTarget, setSelectTarget] = useState(selectTargetData);
+
+  // 선택 상태를 토글
+  const toggleSelection = (id) => {
+    setSelectTarget(prevState =>
+      prevState.map(item =>
+        item.id === id ? { ...item, isSelected: !item.isSelected } : item
+      )
+    );
+  };
+
   return (
     <TargetWrapper>
       <Backspace />
@@ -15,8 +28,13 @@ function Target() {
       </TextWrapper>
 
       <BoxWrapper>
-        {selectTarget.map((val) => (
-          <SelectBox key={val.id} text={val.text} />
+        {selectTarget.map(val => (
+          <SelectBox
+            key={val.id}
+            text={val.text}
+            isSelected={val.isSelected}
+            onClick={() => toggleSelection(val.id)}
+          />
         ))}
       </BoxWrapper>
 
