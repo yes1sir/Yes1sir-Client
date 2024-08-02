@@ -100,6 +100,29 @@ const fonts = {
     line-height: var(--Headline-Large-Line-Height, 40px); /* 166.667% */
     letter-spacing: var(--Headline-Large-Tracking, 0px);
   `,
+  M3_label_large: css`
+    font-family: var(--Label-Large-Font, Roboto);
+    font-size: var(--Label-Large-Size, 14px);
+    font-style: normal;
+    font-weight: 600;
+    line-height: var(--Label-Large-Line-Height, 20px); /* 142.857% */
+    letter-spacing: var(--Label-Large-Tracking, 0.1px);
+  `,
+  M3_body_base: css`
+    font-family: var(--sds-typography-body-font-family);
+    font-size: var(--sds-typography-body-size-medium);
+    font-style: normal;
+    font-weight: var(--sds-typography-body-font-weight-regular);
+    line-height: 140%; /* 22.4px */
+  `,
+  M3_heading: css`
+    font-family: var(--sds-typography-heading-font-family);
+    font-size: var(--sds-typography-heading-size-base);
+    font-style: normal;
+    font-weight: var(--sds-typography-heading-font-weight);
+    line-height: 120%; /* 28.8px */
+    letter-spacing: -0.48px;
+  `,
 };
 
 const theme = {

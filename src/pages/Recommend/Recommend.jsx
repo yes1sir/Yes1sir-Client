@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useLocation } from "react-router-dom";
 import RecommendIngredient from "@/components/Recommend/RecommendIngredient";
+import RecommendItemSection from "@/components/Recommend/RecommendItemSection";
 
 function Recommend() {
   const location = useLocation();
@@ -16,11 +17,14 @@ function Recommend() {
 
   return (
     <RecommendWrapper>
-      <RecommendType
-        dangerouslySetInnerHTML={{ __html: customTitle }}
-        $bgColor={$bgColor}
-      />
-      <RecommendIngredient skinType={skinType} />
+      <RecommendTopContainer>
+        <RecommendType
+          dangerouslySetInnerHTML={{ __html: customTitle }}
+          $bgColor={$bgColor}
+        />
+        <RecommendIngredient skinType={skinType} />
+      </RecommendTopContainer>
+      <RecommendItemSection $bgColor={$bgColor} />
     </RecommendWrapper>
   );
 }
@@ -29,11 +33,18 @@ export default Recommend;
 
 const RecommendWrapper = styled.main`
   display: flex;
+  flex-direction: column;
+  width: 144rem;
+  height: 111rem;
+`;
+
+const RecommendTopContainer = styled.div`
+  display: flex;
   align-items: center;
   justify-content: center;
   width: 144rem;
-  height: 50rem;
-  padding: 0rem 13.8rem;
+  height: 70rem;
+  padding: 6.1rem 13.8rem;
   background-image: url("src/assets/images/bg.png");
   background-size: cover;
 `;
