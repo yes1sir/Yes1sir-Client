@@ -7,6 +7,7 @@ import Recommend from "@/pages/Recommend/Recommend";
 import Age from "@/pages/Age/Age";
 import Target from "@/pages/Target/Target";
 import Test from "@/pages/Test/Test";
+import Detail from "@/pages/Detail/Detail";
 
 export const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ export const router = createBrowserRouter([
       {
         path: "/Recommend",
         element: <Recommend />,
+      },
+      {
+        path: "/Detail",
+        element: <Detail />,
       },
       {
         path: "/Age",
