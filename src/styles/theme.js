@@ -12,6 +12,9 @@ const colors = {
   g02: "#c4c1d8",
   g03: "#8b8b8b",
   g04: "#8E8AAC",
+  g05: "#E5E5ED",
+  g06: "#5E5E5E",
+  g07: "#D4D4D9",
 };
 
 const fonts = {
@@ -123,6 +126,69 @@ const fonts = {
     font-weight: var(--sds-typography-heading-font-weight);
     line-height: 120%; /* 28.8px */
     letter-spacing: -0.48px;
+  `,
+  M3_detail_large: css`
+    font-family: var(--Headline-Large-Font, Roboto);
+    font-size: var(--Headline-Large-Size, 32px);
+    font-style: normal;
+    font-weight: 500;
+    line-height: var(--Headline-Large-Line-Height, 40px); /* 125% */
+    letter-spacing: var(--Headline-Large-Tracking, 0px);
+  `,
+  M3_detail_normal: css`
+    font-family: var(--Headline-Large-Font, Roboto);
+    font-size: var(--Headline-Large-Size, 32px);
+    font-style: normal;
+    font-weight: 400;
+    line-height: var(--Headline-Large-Line-Height, 40px); /* 125% */
+    letter-spacing: var(--Headline-Large-Tracking, 0px);
+  `,
+  M3_detail_xnormal: css`
+    font-family: var(--Headline-Large-Font, Roboto);
+    font-size: var(--Headline-Large-Size, 32px);
+    font-style: normal;
+    font-weight: 400;
+    line-height: var(--Headline-Large-Line-Height, 40px); /* 125% */
+    letter-spacing: var(--Headline-Large-Tracking, 0px);
+  `,
+  M3_detail_small: css`
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: var(--Headline-Large-Line-Height, 40px); /* 166.667% */
+    letter-spacing: var(--Headline-Large-Tracking, 0px);
+  `,
+  M3_modal_normal: css`
+    font-family: Inter;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 4px;
+  `,
+  M3_modal_small: css`
+    font-family: Inter;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 3.2px;
+  `,
+  M3_name_small: css`
+    font-family: Inter;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 1.8px;
+  `,
+  M3_date_small: css`
+    font-family: Inter;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 1.8px;
   `,
 };
 
