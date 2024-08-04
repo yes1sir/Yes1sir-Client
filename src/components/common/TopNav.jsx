@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import { useNavigate } from "react-router-dom"; // useNavigate 훅 import
+import { useNavigate } from "react-router-dom";
 import useNavigateToLogin from "@/utils/common/useNavigateToLogin";
 
 import HamburgerIcon from "@/assets/svgs/hamburger.svg?react";
