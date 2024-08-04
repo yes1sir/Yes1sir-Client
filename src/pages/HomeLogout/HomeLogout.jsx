@@ -21,8 +21,10 @@ export default HomeLogout;
 const HomeLogoutWrapper = styled.main`
   display: flex;
   flex-direction: column;
+
   width: 144rem;
   height: 170.3rem;
+
   background-image: url("src/assets/images/bg.png");
   background-size: cover;
 `;
