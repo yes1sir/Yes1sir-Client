@@ -15,8 +15,8 @@ function TopNav() {
 
   return (
     <HeaderWrapper>
+      <StyledLogoIcon onClick={handleLogoClick} />
       <HeaderContainer>
-        <StyledLogoIcon onClick={handleLogoClick} />{" "}
         <LoginBtn onClick={navigateToLogin}>Log In</LoginBtn>
         <HamburgerIcon />
       </HeaderContainer>
@@ -31,14 +31,15 @@ const HeaderWrapper = styled.header`
   align-items: center;
   width: 144rem;
   height: 7rem;
+  gap: 114.1rem;
+  padding: 0rem 2.6rem;
   background-color: ${({ theme }) => theme.colors.b01};
 `;
 
 const HeaderContainer = styled.div`
   display: flex;
   align-items: center;
-  padding: 0rem 2.6rem;
-  gap: 114.1rem;
+  gap: 4.2rem;
 `;
 
 const LoginBtn = styled.button`
