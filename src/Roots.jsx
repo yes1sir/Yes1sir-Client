@@ -1,11 +1,14 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 
 import TopNav from "@/components/common/TopNav";
 
 function Roots() {
+  const location = useLocation();
+  const isLoginPage = location.pathname === "/login";
+
   return (
     <>
-      <TopNav />
+      {!isLoginPage && <TopNav />}
       <Outlet />
     </>
   );
