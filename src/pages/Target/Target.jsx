@@ -11,8 +11,8 @@ function Target() {
 
   // 선택 상태를 토글
   const toggleSelection = (id) => {
-    setSelectTarget(prevState =>
-      prevState.map(item =>
+    setSelectTarget((prevState) =>
+      prevState.map((item) =>
         item.id === id ? { ...item, isSelected: !item.isSelected } : item
       )
     );
@@ -28,7 +28,7 @@ function Target() {
       </TextWrapper>
 
       <BoxWrapper>
-        {selectTarget.map(val => (
+        {selectTarget.map((val) => (
           <SelectBox
             key={val.id}
             text={val.text}
@@ -49,7 +49,7 @@ const TargetWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  width: 144rem;
   color: ${({ theme }) => theme.colors.w01};
   background-color: ${({ theme }) => theme.colors.b01};
 `;

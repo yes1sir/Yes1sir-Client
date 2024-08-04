@@ -16,7 +16,7 @@ export default function Backspace() {
 
 const BackWrapper = styled.div`
   display: flex;
-  width: 100%;
+  width: 144rem;
   padding-left: 50px;
   padding-top: 23px;
 `;

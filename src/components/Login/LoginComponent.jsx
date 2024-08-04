@@ -68,6 +68,7 @@ const LoginWrapper = styled.div`
   flex-direction: column;
   align-items: center;
 
+  width: 144rem;
   height: 102.4rem;
 
   background-color: ${({ theme }) => theme.colors.b01};
