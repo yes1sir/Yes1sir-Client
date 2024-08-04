@@ -70,8 +70,7 @@ function Test() {
     let PorN = list[2].sum <= 6 ? "N" : "P";
     let TorW = list[3].sum <= 6 ? "W" : "T";
     let mbti = DorO + RorS + PorN + TorW;
-    // console.log("결과:", mbti);
-    nav("/homelogin");
+    nav(`/homelogin?mbti=${mbti}`);
   }, [list, nav]);
 
   useEffect(() => {

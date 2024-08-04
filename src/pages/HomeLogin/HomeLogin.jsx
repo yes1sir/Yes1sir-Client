@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import HomeLoginTitle from "@/components/HomeLogin/HomeLoginTitle";
 import HomeLoginMbti from "@/components/HomeLogin/HomeLoginMbti";
@@ -8,9 +9,14 @@ import HomeLoginMbtiContent from "@/components/HomeLogin/HomeLoginMbtiContent";
 import mbtiContent from "@/constants/HomeLogin/mbtiContent";
 import mbtiTitle from "@/constants/HomeLogin/mbtiTitle";
 
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
+
 function HomeLogin() {
+  const query = useQuery();
+  const skinType = query.get("mbti");
   const userName = "유승빈";
-  const skinType = "DRPT";
   const mbtiCircle = mbtiCircles.find((circle) => circle.text === skinType);
   const textColor = mbtiCircle?.color;
   const initialMbtiCircle = mbtiCircle || mbtiCircles[0];
@@ -31,6 +37,7 @@ function HomeLogin() {
     setMbtiContentTitle(mbtiTitle[skinType]);
     setSelectedIndex(initialIndex);
   }, [initialIndex, skinType]);
+
   const handleMbtiClick = (circle, index) => {
     const isSelected = selectedIndex === index;
     setSelectedMbtiCircle(isSelected ? null : circle);
