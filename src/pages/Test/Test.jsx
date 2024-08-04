@@ -143,7 +143,7 @@ export default Test;
 
 const BackWrapper = styled.div`
   display: flex;
-  width: 100%;
+  width: 144rem;
   padding-left: 50px;
   padding-top: 23px;
 `;
@@ -156,6 +156,7 @@ const TestWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 144rem;
   height: 102.4rem;
 
   background-color: ${({ theme }) => theme.colors.b01};
