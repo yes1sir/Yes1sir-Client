@@ -1,9 +1,12 @@
 import styled from "styled-components";
+import LogoIcon from "@/assets/svgs/Logo.svg?react";
 
 const LoginTop = () => {
   return (
     <LoginTopWrapper>
-      <LogoWrapper>LOGO</LogoWrapper>
+      <LogoWrapper>
+        <StyledLogoIcon />
+      </LogoWrapper>
       <Testdescription>16가지 유형의 피부 MBTI 테스트</Testdescription>
     </LoginTopWrapper>
   );
@@ -26,6 +29,11 @@ const LogoWrapper = styled.div`
 
 const Testdescription = styled.div`
   ${({ theme }) => theme.fonts.M3_headline_large}
+`;
+
+const StyledLogoIcon = styled(LogoIcon)`
+  width: 32.7rem;
+  height: 6.65rem;
 `;
 
 export default LoginTop;
