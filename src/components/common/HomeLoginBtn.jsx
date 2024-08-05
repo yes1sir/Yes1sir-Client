@@ -3,10 +3,10 @@ import { homeLoginBtnPropTypes } from "@/types/homeLoginBtnPropTypes";
 
 HomeLoginBtn.propTypes = homeLoginBtnPropTypes;
 
-function HomeLoginBtn({ backgroundColor, color, text, onClick }) {
+function HomeLoginBtn({ $bgColor, color, text, onClick }) {
   return (
     <HomeLoginBtnBox
-      $backgroundcolor={backgroundColor}
+      $backgroundcolor={$bgColor}
       color={color}
       onClick={onClick}
     >

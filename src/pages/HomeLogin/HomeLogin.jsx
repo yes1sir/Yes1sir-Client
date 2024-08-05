@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import HomeLoginTitle from "@/components/HomeLogin/HomeLoginTitle";
 import HomeLoginMbti from "@/components/HomeLogin/HomeLoginMbti";
@@ -17,6 +17,7 @@ function HomeLogin() {
   const query = useQuery();
   const skinType = query.get("mbti");
   const [userName, setUserName] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const storedUserName = localStorage.getItem("userName");
@@ -24,6 +25,7 @@ function HomeLogin() {
       setUserName(storedUserName);
     }
   }, []);
+
   const mbtiCircle = mbtiCircles.find((circle) => circle.text === skinType);
   const textColor = mbtiCircle?.color;
   const initialMbtiCircle = mbtiCircle || mbtiCircles[0];
@@ -54,6 +56,10 @@ function HomeLogin() {
     setSelectedIndex(isSelected ? null : index);
   };
 
+  const handleRetakeTest = () => {
+    navigate("/Test");
+  };
+
   const content = selectedIndex !== null && selectedMbtiCircle && (
     <HomeLoginMbtiContent
       $bgColor={selectedMbtiCircle?.color}
@@ -71,9 +77,10 @@ function HomeLogin() {
         textColor={textColor}
       />
       <HomeLoginBtn
-        backgroundColor="#42A5C4"
+        $bgColor={selectedMbtiCircle?.color}
         color="#FFF"
         text="다시 진단받기"
+        onClick={handleRetakeTest}
       />
       <HomeLoginMbti
         onMbtiClick={handleMbtiClick}
