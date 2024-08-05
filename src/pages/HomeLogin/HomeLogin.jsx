@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import bgImage from "@/assets/images/bg.png";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import HomeLoginTitle from "@/components/HomeLogin/HomeLoginTitle";
@@ -101,6 +102,6 @@ const HomeLoginWrapper = styled.main`
   gap: 6.5rem;
   width: 144rem;
   height: 170.3rem;
-  background-image: url("src/assets/images/bg.png");
+  background-image: url(${bgImage});
   background-size: cover;
 `;

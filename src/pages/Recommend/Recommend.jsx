@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import bgImage from "@/assets/images/bg.png";
 import { useLocation } from "react-router-dom";
 import RecommendIngredient from "@/components/Recommend/RecommendIngredient";
 import RecommendItemSection from "@/components/Recommend/RecommendItemSection";
@@ -66,7 +67,7 @@ const RecommendTopContainer = styled.div`
   width: 144rem;
   height: 70rem;
   padding: 6.1rem 10rem;
-  background-image: url("src/assets/images/bg.png");
+  background-image: url(${bgImage});
   background-size: cover;
   gap: 8rem;
 `;
