@@ -29,6 +29,7 @@ function Detail() {
         const fetchedReviews = response.data.reviews.map((reviews) => ({
           text: reviews.comment,
           score: reviews.rating,
+          reviewId: reviews.reviewId.toString(),
           date: new Date(reviews.reviewDate)
             .toISOString()
             .split("T")[0]
@@ -62,33 +63,55 @@ function Detail() {
       userName,
     };
 
-    if (editingReview !== null) {
-      const updatedReviews = [...reviews];
-      updatedReviews[editingReview] = newReview;
-      setReviews(updatedReviews);
-    } else {
-      setReviews([...reviews, newReview]);
-    }
-
-    setReviewModalOpen(false);
-
     try {
-      const response = await axios.post(
-        `http://api.yessir.site/api/products/${productId}/reviews`,
-        {
-          userName,
-          rating: score,
-          comment: text,
-        }
-      );
+      let response;
+      if (editingReview !== null) {
+        const reviewToUpdate = reviews[editingReview];
+        response = await axios.put(
+          `http://api.yessir.site/api/products/${productId}/reviews/${reviewToUpdate.reviewId}`,
+          {
+            userName,
+            rating: score,
+            comment: text,
+          }
+        );
+        const updatedReviews = [...reviews];
+        updatedReviews[editingReview] = {
+          ...newReview,
+          reviewId: reviewToUpdate.reviewId,
+        };
+        setReviews(updatedReviews);
+      } else {
+        response = await axios.post(
+          `http://api.yessir.site/api/products/${productId}/reviews`,
+          {
+            userName,
+            rating: score,
+            comment: text,
+          }
+        );
+        setReviews([
+          ...reviews,
+          { ...newReview, reviewId: response.data.reviewId },
+        ]);
+      }
       console.log("리뷰 제출 성공:", response.data);
     } catch (error) {
       console.error("리뷰 제출 중 오류 발생:", error);
+    } finally {
+      setReviewModalOpen(false);
     }
   };
 
-  const handleReviewDelete = (index) => {
-    setReviews(reviews.filter((_, i) => i !== index));
+  const handleReviewDelete = async (reviewId) => {
+    try {
+      await axios.delete(
+        `http://api.yessir.site/api/products/${productId}/reviews/${reviewId}`
+      );
+      setReviews(reviews.filter((review) => review.reviewId !== reviewId));
+    } catch (error) {
+      console.error("리뷰 삭제 중 오류 발생:", error);
+    }
   };
 
   const handleReviewEdit = (index) => {

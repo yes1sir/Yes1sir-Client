@@ -16,7 +16,7 @@ function DetailBottom({ reviews, onDelete, onEdit }) {
             </LeftBox>
             <BtnBox>
               <Btn onClick={() => onEdit(index)}>수정</Btn>
-              <Btn onClick={() => onDelete(index)}>삭제</Btn>
+              <Btn onClick={() => onDelete(review.reviewId)}>삭제</Btn>
             </BtnBox>
           </DetailBottomTop>
           <TextArea>
@@ -37,6 +37,7 @@ DetailBottom.propTypes = {
       date: PropTypes.string,
       userName: PropTypes.string,
       score: PropTypes.number,
+      reviewId: PropTypes.string.isRequired,
     })
   ).isRequired,
   onDelete: PropTypes.func.isRequired,
