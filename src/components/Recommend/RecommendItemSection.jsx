@@ -1,18 +1,18 @@
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import RecommendItemData from "@/constants/Recommend/RecommendItemData";
 import RecommendItem from "@/components/Recommend/RecommendItem";
 
 RecommendItemSection.propTypes = {
   $bgColor: PropTypes.string.isRequired,
+  recommendItems: PropTypes.array.isRequired,
 };
 
-function RecommendItemSection({ $bgColor }) {
+function RecommendItemSection({ $bgColor, recommendItems }) {
   return (
     <RecommendItemsWrapper>
       <RecommendItemContainer>
-        {RecommendItemData.map((item) => (
-          <RecommendItem key={item.id} {...item} $bgColor={$bgColor} />
+        {recommendItems.map((item) => (
+          <RecommendItem key={item.productId} {...item} $bgColor={$bgColor} />
         ))}
       </RecommendItemContainer>
     </RecommendItemsWrapper>
