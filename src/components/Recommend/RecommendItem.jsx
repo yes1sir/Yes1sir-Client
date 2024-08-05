@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
 RecommendItem.propTypes = {
@@ -8,6 +9,7 @@ RecommendItem.propTypes = {
   recommendedType: PropTypes.string.isRequired,
   price: PropTypes.string.isRequired,
   $bgColor: PropTypes.string.isRequired,
+  productId: PropTypes.string.isRequired,
 };
 
 function RecommendItem({
@@ -17,9 +19,15 @@ function RecommendItem({
   recommendedType,
   price,
   $bgColor,
+  productId,
 }) {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/Detail/${productId}`);
+  };
   return (
-    <RecommendItemWrapper>
+    <RecommendItemWrapper onClick={handleClick}>
       <ImgContainer>
         <ImgRecommend src={image} alt="img" />
       </ImgContainer>
