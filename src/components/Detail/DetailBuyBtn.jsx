@@ -17,8 +17,7 @@ const DetailBuyBtnBox = styled.button`
   justify-content: center;
   width: 49.3rem;
   height: 6rem;
-  border-radius: 20px;
+  border-radius: 10px;
   background-color: ${({ theme }) => theme.colors.b01};
   color: ${({ theme }) => theme.colors.w01};
-  margin-top: 6rem;
 `;

@@ -1,13 +1,23 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Backspace from "../../components/common/Backspace";
 import SelectDate from "../../components/Age/SelectDate";
 
 function Age() {
+  const [userName, setUserName] = useState("");
+
+  useEffect(() => {
+    const storedUserName = localStorage.getItem("userName");
+    if (storedUserName) {
+      setUserName(storedUserName);
+    }
+  }, []);
+
   return (
     <AgeWrapper>
       <Backspace />
-      <AgeText>생년월일을 기입해주세요</AgeText>
+      <AgeText>{userName}님, 생년월일을 기입해주세요</AgeText>
       <SelectDate />
       <Link to="/target">
         <ContinueBtn>계속하기</ContinueBtn>

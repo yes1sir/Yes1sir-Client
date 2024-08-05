@@ -20,6 +20,7 @@ function DetailTop() {
           `${import.meta.env.VITE_BASE_URL}api/products/${productId}`
         );
         setProductData(response.data);
+        console.log(response.data);
       } catch (error) {
         console.error("Failed to fetch product data:", error);
       }
@@ -32,20 +33,26 @@ function DetailTop() {
     return <div>Loading...</div>;
   }
 
-  const { image, brandName, productName, recommendedType, price, purpose } =
-    productData;
+  const {
+    imageUrl,
+    brand,
+    name,
+    recommendedType = "",
+    price,
+    benefits = "",
+  } = productData;
 
   const recommendTypes = recommendedType.split(",").map((type) => type.trim());
-  const purposes = purpose.split(",").map((type) => type.trim());
+  const purposes = benefits.split(",").map((type) => type.trim());
 
   return (
     <DetailTopContainer>
       <ImgContainer>
-        <ImgDetail src={image} alt="img" />
+        <ImgDetail src={imageUrl} alt="img" />
       </ImgContainer>
       <DetailTopInfo>
-        <DetailBrandName>{brandName}</DetailBrandName>
-        <DetailProductName>{productName}</DetailProductName>
+        <DetailBrandName>{brand}</DetailBrandName>
+        <DetailProductName>{name}</DetailProductName>
         <StarBox>
           <StarIcon />
           <StarBoxNumber>4.5 (21)</StarBoxNumber>
