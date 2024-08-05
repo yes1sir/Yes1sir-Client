@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
@@ -9,6 +9,8 @@ import DetailBuyBtn from "./DetailBuyBtn";
 
 function DetailTop() {
   const { productId } = useParams();
+  const location = useLocation();
+  const { $bgColor } = location.state;
   const [productData, setProductData] = useState(null);
 
   useEffect(() => {
@@ -53,7 +55,7 @@ function DetailTop() {
         <Text>추천 피부 타입</Text>
         <BtnBox>
           {recommendTypes.map((type, index) => (
-            <DetailRecommendBtn key={index} text={type} />
+            <DetailRecommendBtn key={index} text={type} $bgColor={$bgColor} />
           ))}
         </BtnBox>
         <Text>목적</Text>

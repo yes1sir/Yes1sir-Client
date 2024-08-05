@@ -24,7 +24,7 @@ function RecommendItem({
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/Detail/${productId}`);
+    navigate(`/Detail/${productId}`, { state: { $bgColor } });
   };
   return (
     <RecommendItemWrapper onClick={handleClick}>

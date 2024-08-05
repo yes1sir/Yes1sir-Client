@@ -3,10 +3,13 @@ import PropTypes from "prop-types";
 
 DetailRecommendBtn.propTypes = {
   text: PropTypes.string.isRequired,
+  $bgColor: PropTypes.string.isRequired,
 };
 
-function DetailRecommendBtn({ text }) {
-  return <DetailRecommendBtnBox>{text}</DetailRecommendBtnBox>;
+function DetailRecommendBtn({ text, $bgColor }) {
+  return (
+    <DetailRecommendBtnBox $bgColor={$bgColor}>{text}</DetailRecommendBtnBox>
+  );
 }
 
 export default DetailRecommendBtn;
@@ -18,6 +21,6 @@ const DetailRecommendBtnBox = styled.button`
   width: 13rem;
   height: 4rem;
   border-radius: 100px;
-  background-color: ${({ theme }) => theme.colors.b03};
+  background-color: ${({ $bgColor }) => $bgColor};
   color: ${({ theme }) => theme.colors.w01};
 `;
