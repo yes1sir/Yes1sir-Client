@@ -12,15 +12,36 @@ function Detail() {
   const [isReviewModalOpen, setReviewModalOpen] = useState(false);
   const [reviews, setReviews] = useState([]);
   const [userName, setUserName] = useState("");
+  const [editingReview, setEditingReview] = useState(null);
 
   useEffect(() => {
     const storedUserName = localStorage.getItem("userName");
     if (storedUserName) {
       setUserName(storedUserName);
     }
-  }, []);
 
-  const [editingReview, setEditingReview] = useState(null);
+    const getReviews = async () => {
+      try {
+        const response = await axios.get(
+          `http://api.yessir.site/api/products/${productId}`
+        );
+        const fetchedReviews = response.data.reviews.map((reviews) => ({
+          text: reviews.comment,
+          score: reviews.rating,
+          date: new Date(reviews.reviewDate)
+            .toISOString()
+            .split("T")[0]
+            .replace(/-/g, "."),
+          userName: reviews.userName,
+        }));
+        setReviews(fetchedReviews);
+      } catch (error) {
+        console.error("리뷰 가져오는 중 오류 발생:", error);
+      }
+    };
+
+    getReviews();
+  }, [productId]);
 
   const handleReviewButtonClick = () => {
     setReviewModalOpen(true);
@@ -59,9 +80,9 @@ function Detail() {
           comment: text,
         }
       );
-      console.log("Review submitted successfully:", response.data);
+      console.log("리뷰 제출 성공:", response.data);
     } catch (error) {
-      console.error("Error submitting review:", error);
+      console.error("리뷰 제출 중 오류 발생:", error);
     }
   };
 
