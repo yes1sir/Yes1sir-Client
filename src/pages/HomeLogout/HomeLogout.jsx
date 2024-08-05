@@ -1,4 +1,5 @@
-import { styled } from "styled-components";
+import styled from "styled-components";
+import bgImage from "@/assets/images/bg.png";
 
 import HomeLogoutText from "@/components/HomeLogout/HomeLogoutText";
 import HomeLogoutFix from "@/components/HomeLogout/HomeLogoutFix";
@@ -25,7 +26,7 @@ const HomeLogoutWrapper = styled.main`
   width: 144rem;
   height: 170.3rem;
 
-  background-image: url("src/assets/images/bg.png");
+  background-image: url(${bgImage});
   background-size: cover;
 `;
 
