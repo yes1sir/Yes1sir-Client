@@ -24,7 +24,7 @@ function Detail() {
     const newReview = {
       text,
       image,
-      date: new Date().toISOString().split("T")[0].replace(/-/g, "."), // yyyy-mm-dd 형식을 yyyy.mm.dd로 변환
+      date: new Date().toISOString().split("T")[0].replace(/-/g, "."),
       username,
     };
 

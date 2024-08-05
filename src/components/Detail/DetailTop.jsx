@@ -1,17 +1,42 @@
+import { useParams, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import styled from "styled-components";
 import StarIcon from "@/assets/svgs/star.svg?react";
 import DetailPurposeBtn from "./DetailPurposeBtn";
 import DetailRecommendBtn from "./DetailRecommendBtn";
 import DetailBuyBtn from "./DetailBuyBtn";
-import { detailProductData } from "@/constants/Detail/detailProductData"; // Adjust the import path as necessary
 
 function DetailTop() {
-  const { image, brandName, productName, recommendType, price, purpose } =
-    detailProductData[0];
+  const { productId } = useParams();
+  const location = useLocation();
+  const { $bgColor } = location.state;
+  const [productData, setProductData] = useState(null);
 
-  // Split the recommendType and purpose into individual words
-  const recommendTypes = recommendType.split(", ").map((type) => type.trim());
-  const purposes = purpose.split(", ").map((type) => type.trim());
+  useEffect(() => {
+    const fetchProductData = async () => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_BASE_URL}api/products/${productId}`
+        );
+        setProductData(response.data);
+      } catch (error) {
+        console.error("Failed to fetch product data:", error);
+      }
+    };
+
+    fetchProductData();
+  }, [productId]);
+
+  if (!productData) {
+    return <div>Loading...</div>;
+  }
+
+  const { image, brandName, productName, recommendedType, price, purpose } =
+    productData;
+
+  const recommendTypes = recommendedType.split(",").map((type) => type.trim());
+  const purposes = purpose.split(",").map((type) => type.trim());
 
   return (
     <DetailTopContainer>
@@ -30,7 +55,7 @@ function DetailTop() {
         <Text>추천 피부 타입</Text>
         <BtnBox>
           {recommendTypes.map((type, index) => (
-            <DetailRecommendBtn key={index} text={type} />
+            <DetailRecommendBtn key={index} text={type} $bgColor={$bgColor} />
           ))}
         </BtnBox>
         <Text>목적</Text>
