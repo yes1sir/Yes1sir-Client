@@ -1,5 +1,6 @@
 import { useParams, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import axios from "axios";
 import styled from "styled-components";
 import StarIcon from "@/assets/svgs/star.svg?react";
@@ -7,7 +8,12 @@ import DetailPurposeBtn from "./DetailPurposeBtn";
 import DetailRecommendBtn from "./DetailRecommendBtn";
 import DetailBuyBtn from "./DetailBuyBtn";
 
-function DetailTop() {
+DetailTop.propTypes = {
+  reviewCount: PropTypes.number.isRequired,
+  onReviewClick: PropTypes.func.isRequired,
+};
+
+function DetailTop({ reviewCount, onReviewClick }) {
   const { productId } = useParams();
   const location = useLocation();
   const { $bgColor } = location.state;
@@ -55,8 +61,8 @@ function DetailTop() {
         <DetailProductName>{name}</DetailProductName>
         <StarBox>
           <StarIcon />
-          <StarBoxNumber>4.5 (21)</StarBoxNumber>
-          <StarBoxReview>리뷰보기</StarBoxReview>
+          <StarBoxNumber>({reviewCount})</StarBoxNumber>
+          <StarBoxReview onClick={onReviewClick}>리뷰보기</StarBoxReview>
         </StarBox>
         <DetailPrice>{price}원</DetailPrice>
         <Text>추천 피부 타입</Text>
@@ -120,7 +126,7 @@ const DetailProductName = styled.p`
 
 const StarBox = styled.div`
   display: flex;
-  gap: 1.2rem;
+  gap: 0.5rem;
 `;
 
 const StarBoxNumber = styled.p`
@@ -130,6 +136,7 @@ const StarBoxNumber = styled.p`
 const StarBoxReview = styled.p`
   ${({ theme }) => theme.fonts.M3_content_xxsmall};
   margin-left: 1.8rem;
+  cursor: pointer;
 `;
 
 const DetailPrice = styled.p`

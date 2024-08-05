@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import DetailTop from "@/components/Detail/DetailTop";
@@ -13,6 +13,7 @@ function Detail() {
   const [reviews, setReviews] = useState([]);
   const [userName, setUserName] = useState("");
   const [editingReview, setEditingReview] = useState(null);
+  const detailBottomRef = useRef(null);
 
   useEffect(() => {
     const storedUserName = localStorage.getItem("userName");
@@ -95,10 +96,19 @@ function Detail() {
     setReviewModalOpen(true);
   };
 
+  const scrollToReviews = () => {
+    if (detailBottomRef.current) {
+      detailBottomRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <DetailWrapper>
-      <DetailTop />
-      <DetailMiddle onReviewButtonClick={handleReviewButtonClick} />
+      <DetailTop reviewCount={reviews.length} onReviewClick={scrollToReviews} />
+      <DetailMiddle
+        onReviewButtonClick={handleReviewButtonClick}
+        reviewCount={reviews.length}
+      />
       {isReviewModalOpen && (
         <ReviewModal
           onClose={handleCloseModal}
@@ -107,11 +117,13 @@ function Detail() {
         />
       )}
       {reviews.length > 0 && (
-        <DetailBottom
-          reviews={reviews}
-          onDelete={handleReviewDelete}
-          onEdit={handleReviewEdit}
-        />
+        <div ref={detailBottomRef}>
+          <DetailBottom
+            reviews={reviews}
+            onDelete={handleReviewDelete}
+            onEdit={handleReviewEdit}
+          />
+        </div>
       )}
     </DetailWrapper>
   );
