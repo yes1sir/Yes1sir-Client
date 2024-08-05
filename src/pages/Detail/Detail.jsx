@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import DetailTop from "@/components/Detail/DetailTop";
@@ -13,6 +13,7 @@ function Detail() {
   const [reviews, setReviews] = useState([]);
   const [userName, setUserName] = useState("");
   const [editingReview, setEditingReview] = useState(null);
+  const detailBottomRef = useRef(null);
 
   useEffect(() => {
     const storedUserName = localStorage.getItem("userName");
@@ -25,14 +26,15 @@ function Detail() {
         const response = await axios.get(
           `http://api.yessir.site/api/products/${productId}`
         );
-        const fetchedReviews = response.data.reviews.map((reviews) => ({
-          text: reviews.comment,
-          score: reviews.rating,
-          date: new Date(reviews.reviewDate)
+        const fetchedReviews = response.data.reviews.map((review) => ({
+          text: review.comment,
+          score: review.rating,
+          reviewId: review.reviewId.toString(),
+          date: new Date(review.reviewDate)
             .toISOString()
             .split("T")[0]
             .replace(/-/g, "."),
-          userName: reviews.userName,
+          userName: review.userName,
         }));
         setReviews(fetchedReviews);
       } catch (error) {
@@ -61,33 +63,53 @@ function Detail() {
       userName,
     };
 
-    if (editingReview !== null) {
-      const updatedReviews = [...reviews];
-      updatedReviews[editingReview] = newReview;
-      setReviews(updatedReviews);
-    } else {
-      setReviews([...reviews, newReview]);
-    }
-
-    setReviewModalOpen(false);
-
     try {
-      const response = await axios.post(
-        `http://api.yessir.site/api/products/${productId}/reviews`,
-        {
-          userName,
-          rating: score,
-          comment: text,
-        }
-      );
-      console.log("리뷰 제출 성공:", response.data);
+      let response;
+      if (editingReview !== null) {
+        const reviewToUpdate = reviews[editingReview];
+        response = await axios.patch(
+          `http://api.yessir.site/api/products/${productId}/reviews/${reviewToUpdate.reviewId}`,
+          {
+            rating: score,
+            comment: text,
+          }
+        );
+        const updatedReviews = [...reviews];
+        updatedReviews[editingReview] = {
+          ...newReview,
+          reviewId: reviewToUpdate.reviewId,
+        };
+        setReviews(updatedReviews);
+      } else {
+        response = await axios.post(
+          `http://api.yessir.site/api/products/${productId}/reviews`,
+          {
+            userName,
+            rating: score,
+            comment: text,
+          }
+        );
+        setReviews([
+          ...reviews,
+          { ...newReview, reviewId: response.data.reviewId },
+        ]);
+      }
     } catch (error) {
       console.error("리뷰 제출 중 오류 발생:", error);
+    } finally {
+      setReviewModalOpen(false);
     }
   };
 
-  const handleReviewDelete = (index) => {
-    setReviews(reviews.filter((_, i) => i !== index));
+  const handleReviewDelete = async (reviewId) => {
+    try {
+      await axios.delete(
+        `http://api.yessir.site/api/products/${productId}/reviews/${reviewId}`
+      );
+      setReviews(reviews.filter((review) => review.reviewId !== reviewId));
+    } catch (error) {
+      console.error("리뷰 삭제 중 오류 발생:", error);
+    }
   };
 
   const handleReviewEdit = (index) => {
@@ -95,10 +117,19 @@ function Detail() {
     setReviewModalOpen(true);
   };
 
+  const scrollToReviews = () => {
+    if (detailBottomRef.current) {
+      detailBottomRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <DetailWrapper>
-      <DetailTop />
-      <DetailMiddle onReviewButtonClick={handleReviewButtonClick} />
+      <DetailTop reviewCount={reviews.length} onReviewClick={scrollToReviews} />
+      <DetailMiddle
+        onReviewButtonClick={handleReviewButtonClick}
+        reviewCount={reviews.length}
+      />
       {isReviewModalOpen && (
         <ReviewModal
           onClose={handleCloseModal}
@@ -107,11 +138,13 @@ function Detail() {
         />
       )}
       {reviews.length > 0 && (
-        <DetailBottom
-          reviews={reviews}
-          onDelete={handleReviewDelete}
-          onEdit={handleReviewEdit}
-        />
+        <div ref={detailBottomRef}>
+          <DetailBottom
+            reviews={reviews}
+            onDelete={handleReviewDelete}
+            onEdit={handleReviewEdit}
+          />
+        </div>
       )}
     </DetailWrapper>
   );

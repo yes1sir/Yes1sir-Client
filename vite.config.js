@@ -8,4 +8,14 @@ export default defineConfig({
   resolve: {
     alias: [{ find: "@", replacement: "/src" }],
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          "react-vendor": ["react", "react-dom"],
+        },
+      },
+    },
+    chunkSizeWarningLimit: 600,
+  },
 });

@@ -1,12 +1,12 @@
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-function DetailMiddle({ onReviewButtonClick }) {
+function DetailMiddle({ onReviewButtonClick, reviewCount }) {
   return (
     <DetailMiddleBox>
       <ReviewContainer>
         <ReviewText>리뷰</ReviewText>
-        <ReviewNumber>(21)</ReviewNumber>
+        <ReviewNumber>({reviewCount})</ReviewNumber>
       </ReviewContainer>
       <ReviewPostBtn onClick={onReviewButtonClick}>
         작성하기 &#62;
@@ -17,6 +17,7 @@ function DetailMiddle({ onReviewButtonClick }) {
 
 DetailMiddle.propTypes = {
   onReviewButtonClick: PropTypes.func.isRequired,
+  reviewCount: PropTypes.number.isRequired,
 };
 
 export default DetailMiddle;
