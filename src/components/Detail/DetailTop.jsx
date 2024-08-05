@@ -26,7 +26,6 @@ function DetailTop({ reviewCount, onReviewClick }) {
           `${import.meta.env.VITE_BASE_URL}api/products/${productId}`
         );
         setProductData(response.data);
-        console.log(response.data);
       } catch (error) {
         console.error("Failed to fetch product data:", error);
       }

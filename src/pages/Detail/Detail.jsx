@@ -26,15 +26,15 @@ function Detail() {
         const response = await axios.get(
           `http://api.yessir.site/api/products/${productId}`
         );
-        const fetchedReviews = response.data.reviews.map((reviews) => ({
-          text: reviews.comment,
-          score: reviews.rating,
-          reviewId: reviews.reviewId.toString(),
-          date: new Date(reviews.reviewDate)
+        const fetchedReviews = response.data.reviews.map((review) => ({
+          text: review.comment,
+          score: review.rating,
+          reviewId: review.reviewId.toString(),
+          date: new Date(review.reviewDate)
             .toISOString()
             .split("T")[0]
             .replace(/-/g, "."),
-          userName: reviews.userName,
+          userName: review.userName,
         }));
         setReviews(fetchedReviews);
       } catch (error) {
@@ -67,10 +67,9 @@ function Detail() {
       let response;
       if (editingReview !== null) {
         const reviewToUpdate = reviews[editingReview];
-        response = await axios.put(
+        response = await axios.patch(
           `http://api.yessir.site/api/products/${productId}/reviews/${reviewToUpdate.reviewId}`,
           {
-            userName,
             rating: score,
             comment: text,
           }
@@ -95,7 +94,6 @@ function Detail() {
           { ...newReview, reviewId: response.data.reviewId },
         ]);
       }
-      console.log("리뷰 제출 성공:", response.data);
     } catch (error) {
       console.error("리뷰 제출 중 오류 발생:", error);
     } finally {
