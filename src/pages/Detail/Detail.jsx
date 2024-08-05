@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import DetailTop from "@/components/Detail/DetailTop";
 import DetailMiddle from "@/components/Detail/DetailMiddle";
 import ReviewModal from "@/components/Detail/ReviewModal";
 import DetailBottom from "@/components/Detail/DetailBottom";
+import axios from "axios";
 
 function Detail() {
+  const { productId } = useParams();
   const [isReviewModalOpen, setReviewModalOpen] = useState(false);
   const [reviews, setReviews] = useState([]);
   const [userName, setUserName] = useState("");
@@ -28,7 +31,7 @@ function Detail() {
     setReviewModalOpen(false);
   };
 
-  const handleReviewSubmit = (text, image, score) => {
+  const handleReviewSubmit = async (text, image, score) => {
     const newReview = {
       text,
       image,
@@ -46,6 +49,20 @@ function Detail() {
     }
 
     setReviewModalOpen(false);
+
+    try {
+      const response = await axios.post(
+        `http://api.yessir.site/api/products/${productId}/reviews`,
+        {
+          userName,
+          rating: score,
+          comment: text,
+        }
+      );
+      console.log("Review submitted successfully:", response.data);
+    } catch (error) {
+      console.error("Error submitting review:", error);
+    }
   };
 
   const handleReviewDelete = (index) => {

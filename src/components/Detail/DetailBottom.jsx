@@ -20,8 +20,8 @@ function DetailBottom({ reviews, onDelete, onEdit }) {
             </BtnBox>
           </DetailBottomTop>
           <TextArea>
-            {review.text && <p>{review.text}</p>}
-            {review.image && <img src={review.image} alt="Review" />}
+            {<p>{review.text}</p>}
+            {<img src={review.image} alt="Review" />}
           </TextArea>
         </DetailBottomContainer>
       ))}

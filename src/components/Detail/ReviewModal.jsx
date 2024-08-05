@@ -27,6 +27,8 @@ function ReviewModal({ onClose, onSubmit, review }) {
     }
   }, [review]);
 
+  console.log(text);
+
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -39,6 +41,7 @@ function ReviewModal({ onClose, onSubmit, review }) {
   };
 
   const handleSubmit = () => {
+    console.log("Submitting review:", { text, image, rating });
     onSubmit(text, image, rating);
   };
 
