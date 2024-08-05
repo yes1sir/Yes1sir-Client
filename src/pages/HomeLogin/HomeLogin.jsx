@@ -16,7 +16,14 @@ function useQuery() {
 function HomeLogin() {
   const query = useQuery();
   const skinType = query.get("mbti");
-  const userName = "유승빈";
+  const [userName, setUserName] = useState("");
+
+  useEffect(() => {
+    const storedUserName = localStorage.getItem("userName");
+    if (storedUserName) {
+      setUserName(storedUserName);
+    }
+  }, []);
   const mbtiCircle = mbtiCircles.find((circle) => circle.text === skinType);
   const textColor = mbtiCircle?.color;
   const initialMbtiCircle = mbtiCircle || mbtiCircles[0];

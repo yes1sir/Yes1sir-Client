@@ -15,11 +15,14 @@ const LoginComponent = () => {
     if (isLoggedIn === "true") {
       if (!localStorage.getItem("hasCompletedAgeInfo")) {
         navigate("/age");
+        console.log(localStorage);
       } else {
         navigate("/homelogin");
       }
     }
   }, [navigate]);
+
+  console.log(localStorage);
 
   const login = useGoogleLogin({
     onSuccess: (tokenResponse) => handleLoginSuccess(tokenResponse),
@@ -33,10 +36,9 @@ const LoginComponent = () => {
         { headers: { Authorization: `Bearer ${tokenResponse.access_token}` } }
       );
 
-      console.log(userInfo.data);
-
       localStorage.setItem("isLoggedIn", "true");
       localStorage.setItem("userId", userInfo.data.sub);
+      localStorage.setItem("userName", userInfo.data.name);
 
       if (!localStorage.getItem("hasCompletedAgeInfo")) {
         navigate("/age");
