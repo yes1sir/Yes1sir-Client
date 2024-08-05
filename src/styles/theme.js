@@ -127,6 +127,14 @@ const fonts = {
     line-height: 120%; /* 28.8px */
     letter-spacing: -0.48px;
   `,
+  M3_heading_type: css`
+    font-family: var(--sds-typography-heading-font-family);
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 120%; /* 28.8px */
+    letter-spacing: -0.48px;
+  `,
   M3_detail_large: css`
     font-family: var(--Headline-Large-Font, Roboto);
     font-size: var(--Headline-Large-Size, 32px);

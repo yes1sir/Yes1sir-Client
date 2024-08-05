@@ -2,10 +2,28 @@ import styled from "styled-components";
 import { useLocation } from "react-router-dom";
 import RecommendIngredient from "@/components/Recommend/RecommendIngredient";
 import RecommendItemSection from "@/components/Recommend/RecommendItemSection";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 function Recommend() {
   const location = useLocation();
   const { title, skinType, $bgColor } = location.state;
+  const [recommendItems, setRecommendItems] = useState([]);
+
+  useEffect(() => {
+    const fetchRecommendItems = async () => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_BASE_URL}api/recommendations/${skinType}`
+        );
+        setRecommendItems(response.data);
+      } catch (error) {
+        console.error("Failed to fetch recommend items:", error);
+      }
+    };
+
+    fetchRecommendItems();
+  }, [skinType]);
 
   const customTitle = title
     .split("|")
@@ -24,7 +42,10 @@ function Recommend() {
         />
         <RecommendIngredient skinType={skinType} />
       </RecommendTopContainer>
-      <RecommendItemSection $bgColor={$bgColor} />
+      <RecommendItemSection
+        $bgColor={$bgColor}
+        recommendItems={recommendItems}
+      />
     </RecommendWrapper>
   );
 }

@@ -5,7 +5,7 @@ RecommendItem.propTypes = {
   image: PropTypes.string.isRequired,
   brandName: PropTypes.string.isRequired,
   productName: PropTypes.string.isRequired,
-  recommendType: PropTypes.string.isRequired,
+  recommendedType: PropTypes.string.isRequired,
   price: PropTypes.string.isRequired,
   $bgColor: PropTypes.string.isRequired,
 };
@@ -14,7 +14,7 @@ function RecommendItem({
   image,
   brandName,
   productName,
-  recommendType,
+  recommendedType,
   price,
   $bgColor,
 }) {
@@ -28,7 +28,7 @@ function RecommendItem({
       <RecommendTypeContainer>
         <RecommendTypeBtn $bgColor={$bgColor}>추천타입</RecommendTypeBtn>
         <RecommendTypeName $bgColor={$bgColor}>
-          {recommendType}
+          {recommendedType}
         </RecommendTypeName>
       </RecommendTypeContainer>
       <RecommendPrice>{price}원</RecommendPrice>
@@ -45,13 +45,19 @@ const RecommendItemWrapper = styled.div`
   flex-direction: column;
   gap: 1rem;
   padding-top: 3rem;
-  width: 30rem;
+  width: 33rem;
 `;
 
 const ImgContainer = styled.div`
   display: flex;
   width: 25.2rem;
   height: 25.2rem;
+`;
+
+const ImgRecommend = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 `;
 
 const RecommendBrandName = styled.p`
@@ -85,16 +91,10 @@ const RecommendTypeBtn = styled.button`
 
 const RecommendTypeName = styled.p`
   color: ${({ $bgColor }) => $bgColor};
-  ${({ theme }) => theme.fonts.M3_heading};
+  ${({ theme }) => theme.fonts.M3_heading_type};
 `;
 
 const RecommendPrice = styled.p`
   ${({ theme }) => theme.fonts.M3_body_base};
   color: ${({ theme }) => theme.colors.b01};
-`;
-
-const ImgRecommend = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 `;
