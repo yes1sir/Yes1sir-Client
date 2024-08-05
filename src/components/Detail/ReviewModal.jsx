@@ -1,6 +1,8 @@
 import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 ReviewModal.propTypes = {
   onClose: PropTypes.func.isRequired,
@@ -8,17 +10,20 @@ ReviewModal.propTypes = {
   review: PropTypes.shape({
     text: PropTypes.string,
     image: PropTypes.string,
+    rating: PropTypes.number,
   }),
 };
 
 function ReviewModal({ onClose, onSubmit, review }) {
   const [text, setText] = useState("");
   const [image, setImage] = useState(null);
+  const [rating, setRating] = useState(0);
 
   useEffect(() => {
     if (review) {
       setText(review.text);
       setImage(review.image);
+      setRating(review.rating || 0);
     }
   }, [review]);
 
@@ -34,7 +39,7 @@ function ReviewModal({ onClose, onSubmit, review }) {
   };
 
   const handleSubmit = () => {
-    onSubmit(text, image);
+    onSubmit(text, image, rating);
   };
 
   return (
@@ -44,6 +49,20 @@ function ReviewModal({ onClose, onSubmit, review }) {
           <Title>후기 작성</Title>
           <CloseButton onClick={onClose}>&times;</CloseButton>
         </TopBox>
+        <ScoreBox>
+          <Text>평점</Text>
+          <RatingBox>
+            {[1, 2, 3, 4, 5].map((score) => (
+              <RatingButton
+                key={score}
+                selected={rating >= score}
+                onClick={() => setRating(score)}
+              >
+                <FontAwesomeIcon icon={faStar} />
+              </RatingButton>
+            ))}
+          </RatingBox>
+        </ScoreBox>
         <MiddleBox>
           <Text>상품평</Text>
           <Textarea
@@ -116,6 +135,42 @@ const CloseButton = styled.button`
   cursor: pointer;
 `;
 
+const ScoreBox = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 2rem;
+`;
+
+const RatingBox = styled.div`
+  display: flex;
+  gap: 1rem;
+  margin-left: 2rem;
+`;
+
+const RatingButton = styled.button`
+  background-color: ${({ selected, theme }) =>
+    selected ? theme.colors.y01 : theme.colors.g03};
+  color: ${({ theme }) => theme.colors.w01};
+  border: none;
+  border-radius: 100%;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.5rem;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.g04};
+  }
+
+  svg {
+    color: ${({ selected, theme }) =>
+      selected ? theme.colors.y02 : theme.colors.g02};
+  }
+`;
+
 const MiddleBox = styled.div`
   display: flex;
   flex-direction: column;
@@ -131,7 +186,7 @@ const Title = styled.h2`
 
 const Textarea = styled.textarea`
   width: 100%;
-  height: 43.5rem;
+  height: 38rem;
   border: 1px solid #ccc;
   border-radius: 4px;
 `;
@@ -142,7 +197,7 @@ const ImageUpload = styled.div`
   flex-direction: column;
   justify-content: center;
   margin-top: 2.7rem;
-  gap: 2.7rem;
+  gap: 0.5rem;
 `;
 
 const Text = styled.p`

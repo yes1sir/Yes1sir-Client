@@ -8,7 +8,10 @@ function DetailBottom({ reviews, onDelete, onEdit }) {
         <DetailBottomContainer key={index}>
           <DetailBottomTop>
             <LeftBox>
-              <UserName>{review.username}</UserName>
+              <LeftTopBox>
+                <UserName>{review.userName}</UserName>
+                <ScoreData>평점: {review.score}</ScoreData>
+              </LeftTopBox>
               <PostDate>{review.date}</PostDate>
             </LeftBox>
             <BtnBox>
@@ -32,7 +35,8 @@ DetailBottom.propTypes = {
       text: PropTypes.string,
       image: PropTypes.string,
       date: PropTypes.string,
-      username: PropTypes.string,
+      userName: PropTypes.string,
+      score: PropTypes.number,
     })
   ).isRequired,
   onDelete: PropTypes.func.isRequired,
@@ -69,6 +73,12 @@ const LeftBox = styled.div`
   gap: 1rem;
 `;
 
+const LeftTopBox = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+`;
+
 const UserName = styled.p`
   color: ${({ theme }) => theme.colors.b01};
   ${({ theme }) => theme.fonts.M3_name_small};
@@ -77,6 +87,11 @@ const UserName = styled.p`
 const PostDate = styled.p`
   color: ${({ theme }) => theme.colors.g06};
   ${({ theme }) => theme.fonts.M3_date_small};
+`;
+
+const ScoreData = styled.p`
+  color: ${({ theme }) => theme.colors.y01};
+  ${({ theme }) => theme.fonts.M3_name_small};
 `;
 
 const BtnBox = styled.div`

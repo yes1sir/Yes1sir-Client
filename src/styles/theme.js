@@ -15,6 +15,9 @@ const colors = {
   g05: "#E5E5ED",
   g06: "#5E5E5E",
   g07: "#D4D4D9",
+
+  y01: "#FFF56E",
+  y02: "#FFB400",
 };
 
 const fonts = {
