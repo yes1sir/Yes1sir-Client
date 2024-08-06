@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import DetailMbtiCircle from "./DetailMbtiCircle";
 
 function DetailBottom({ reviews, onDelete, onEdit }) {
   return (
@@ -10,7 +9,6 @@ function DetailBottom({ reviews, onDelete, onEdit }) {
           <DetailBottomTop>
             <LeftBox>
               <LeftTopBox>
-                <DetailMbtiCircle />
                 <UserName>{review.userName}</UserName>
                 <ScoreData>평점: {review.score}</ScoreData>
               </LeftTopBox>
