@@ -10,6 +10,8 @@ RecommendItem.propTypes = {
   price: PropTypes.string.isRequired,
   $bgColor: PropTypes.string.isRequired,
   productId: PropTypes.string.isRequired,
+  applicableTypes: PropTypes.string.isRequired,
+  purpose: PropTypes.string.isRequired,
 };
 
 function RecommendItem({

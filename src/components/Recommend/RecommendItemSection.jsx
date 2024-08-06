@@ -4,14 +4,25 @@ import RecommendItem from "@/components/Recommend/RecommendItem";
 
 RecommendItemSection.propTypes = {
   $bgColor: PropTypes.string.isRequired,
-  recommendItems: PropTypes.array.isRequired,
+  recommendItems: PropTypes.arrayOf(
+    PropTypes.shape({
+      productId: PropTypes.string.isRequired,
+      productName: PropTypes.string.isRequired,
+      brandName: PropTypes.string.isRequired,
+      recommendedType: PropTypes.string.isRequired,
+      applicableTypes: PropTypes.string.isRequired,
+      price: PropTypes.string.isRequired,
+      image: PropTypes.string.isRequired,
+      purpose: PropTypes.string.isRequired,
+    })
+  ).isRequired,
 };
 
 function RecommendItemSection({ $bgColor, recommendItems }) {
   return (
     <RecommendItemsWrapper>
       <RecommendItemContainer>
-        {recommendItems?.map((item) => (
+        {recommendItems.map((item) => (
           <RecommendItem key={item.productId} {...item} $bgColor={$bgColor} />
         ))}
       </RecommendItemContainer>
