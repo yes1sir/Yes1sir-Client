@@ -66,6 +66,7 @@ const LoginComponent = () => {
       client_id: import.meta.env.VITE_GOOGLE_AUTH_CLIENT_ID,
       redirect_uri: window.location.origin,
       grant_type: "authorization_code",
+      client_secret: import.meta.env.VITE_GOOGLE_AUTH_CLIENT_SECRET,
     });
     return response.data;
   };
