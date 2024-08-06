@@ -30,7 +30,7 @@ function Detail() {
     const getReviews = async () => {
       try {
         const response = await axios.get(
-          `http://api.yessir.site/api/products/${productId}`
+          `${import.meta.env.VITE_BASE_URL}/api/products/${productId}`
         );
         const fetchedReviews = response.data.reviews.map((review) => ({
           text: review.comment,
@@ -74,7 +74,7 @@ function Detail() {
       if (editingReview !== null) {
         const reviewToUpdate = reviews[editingReview];
         response = await axios.patch(
-          `http://api.yessir.site/api/products/${productId}/reviews/${reviewToUpdate.reviewId}`,
+          `${import.meta.env.VITE_BASE_URL}/api/products/${productId}/reviews/${reviewToUpdate.reviewId}`,
           {
             rating: score,
             comment: text,
@@ -88,7 +88,7 @@ function Detail() {
         setReviews(updatedReviews);
       } else {
         response = await axios.post(
-          `http://api.yessir.site/api/products/${productId}/reviews`,
+          `${import.meta.env.VITE_BASE_URL}/api/products/${productId}/reviews`,
           {
             userName,
             rating: score,
@@ -110,7 +110,7 @@ function Detail() {
   const handleReviewDelete = async (reviewId) => {
     try {
       await axios.delete(
-        `http://api.yessir.site/api/products/${productId}/reviews/${reviewId}`
+        `${import.meta.env.VITE_BASE_URL}/api/products/${productId}/reviews/${reviewId}`
       );
       setReviews(reviews.filter((review) => review.reviewId !== reviewId));
     } catch (error) {

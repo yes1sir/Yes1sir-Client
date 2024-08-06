@@ -11,8 +11,6 @@ function Recommend() {
   const { title, skinType, $bgColor } = location.state;
   const [recommendItems, setRecommendItems] = useState([]);
 
-  console.log(import.meta.env.VITE_BASE_URL);
-
   useEffect(() => {
     const fetchRecommendItems = async () => {
       try {
