@@ -23,7 +23,7 @@ function DetailTop({ reviewCount, onReviewClick }) {
     const fetchProductData = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_BASE_URL}api/products/${productId}`
+          `${import.meta.env.VITE_BASE_URL}/api/products/${productId}`
         );
         setProductData(response.data);
       } catch (error) {

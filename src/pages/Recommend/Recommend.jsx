@@ -15,7 +15,7 @@ function Recommend() {
     const fetchRecommendItems = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_BASE_URL}api/recommendations/${skinType}`
+          `${import.meta.env.VITE_BASE_URL}/api/recommendations/${skinType}`
         );
         setRecommendItems(response.data);
       } catch (error) {
