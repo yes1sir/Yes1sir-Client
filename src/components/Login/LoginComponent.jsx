@@ -1,8 +1,8 @@
+// LoginComponent.jsx
 import { useEffect } from "react";
 import { useGoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import axios from "axios";
 import Backspace from "../../components/common/Backspace";
 import LoginTop from "./LoginTop";
 import GoogleIcon from "@/assets/svgs/google_logo.svg?react";
@@ -22,33 +22,34 @@ const LoginComponent = () => {
   }, [navigate]);
 
   const login = useGoogleLogin({
-    onSuccess: (tokenResponse) => handleLoginSuccess(tokenResponse),
-    onError: () => console.log("Login Failed"),
-    flow: "auth-code", // 추가: auth code flow 사용
-    redirectUri: "postmessage", // 콜백 경로 설정
+    onSuccess: (codeResponse) => handleLoginSuccess(codeResponse),
+    onError: () => console.log("로그인 실패"),
+    flow: "auth-code",
+    ux_mode: "popup",
+    scope: "profile email",
   });
 
-  const handleLoginSuccess = async (tokenResponse) => {
-    console.log("Token response:", tokenResponse);
+  const handleLoginSuccess = async (codeResponse) => {
+    console.log("로그인 응답:", codeResponse);
 
-    // 수정된 부분: access_token 추출 및 확인
-    const { access_token } = tokenResponse;
+    const { access_token } = codeResponse;
     if (!access_token) {
-      console.error("Access token is undefined");
+      console.error("액세스 토큰이 정의되지 않았습니다");
       return;
     }
 
     try {
-      const userInfo = await axios.get(
+      const result = await fetch(
         "https://www.googleapis.com/oauth2/v3/userinfo",
-        { headers: { Authorization: `Bearer ${access_token}` } } // 수정된 부분: 올바른 헤더 설정
+        {
+          headers: { Authorization: `Bearer ${access_token}` },
+        }
       );
-
-      console.log("User info:", userInfo);
+      const userInfo = await result.json();
 
       localStorage.setItem("isLoggedIn", "true");
-      localStorage.setItem("userId", userInfo.data.sub);
-      localStorage.setItem("userName", userInfo.data.name);
+      localStorage.setItem("userId", userInfo.sub);
+      localStorage.setItem("userName", userInfo.name);
 
       if (!localStorage.getItem("hasCompletedAgeInfo")) {
         navigate("/age");
@@ -56,7 +57,8 @@ const LoginComponent = () => {
         navigate("/homelogin");
       }
     } catch (error) {
-      console.error("Error fetching user info:", error);
+      console.error("사용자 정보 가져오기 오류:", error);
+      navigate("/login");
     }
   };
 
@@ -79,10 +81,8 @@ const LoginWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
   width: 144rem;
   height: 102.4rem;
-
   background-color: ${({ theme }) => theme.colors.b01};
   color: ${({ theme }) => theme.colors.w01};
 `;
@@ -105,7 +105,6 @@ const LoginBtn = styled.div`
   padding: 15px 15px 15px 168px;
   align-items: flex-start;
   gap: 15px;
-
   border-radius: 10px;
   background: #fff;
   box-shadow:
