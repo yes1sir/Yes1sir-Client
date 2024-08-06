@@ -22,20 +22,39 @@ const LoginComponent = () => {
   }, [navigate]);
 
   const login = useGoogleLogin({
-    onSuccess: (tokenResponse) => handleLoginSuccess(tokenResponse),
+    onSuccess: (codeResponse) => handleLoginSuccess(codeResponse),
     onError: () => console.log("Login Failed"),
-    flow: "auth-code", // 추가: auth code flow 사용
-    redirectUri: "https://yes1sir.vercel.app/oauth/callback", // 콜백 경로 설정
+    flow: "auth-code",
+    redirectUri: "https://yes1sir.vercel.app/oauth/callback",
   });
 
-  const handleLoginSuccess = async (tokenResponse) => {
-    console.log("Token response:", tokenResponse);
-    const { access_token } = tokenResponse;
-    if (!access_token) {
-      console.error("Access token is undefined");
+  const handleLoginSuccess = async (codeResponse) => {
+    console.log("Code response:", codeResponse);
+
+    const { code } = codeResponse;
+    if (!code) {
+      console.error("Authorization code is undefined");
       return;
     }
+
     try {
+      const tokenResponse = await axios.post(
+        "https://oauth2.googleapis.com/token",
+        {
+          code,
+          client_id: import.meta.env.VITE_GOOGLE_AUTH_CLIENT_ID,
+          redirect_uri: "https://yes1sir.vercel.app/oauth/callback",
+          grant_type: "authorization_code",
+          code_verifier: codeResponse.codeVerifier, // 자동 생성된 code_verifier 사용
+        }
+      );
+
+      const { access_token } = tokenResponse.data;
+      if (!access_token) {
+        console.error("Access token is undefined");
+        return;
+      }
+
       const userInfo = await axios.get(
         "https://www.googleapis.com/oauth2/v3/userinfo",
         { headers: { Authorization: `Bearer ${access_token}` } }
