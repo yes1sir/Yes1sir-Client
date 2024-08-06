@@ -11,7 +11,7 @@ function RecommendItemSection({ $bgColor, recommendItems }) {
   return (
     <RecommendItemsWrapper>
       <RecommendItemContainer>
-        {recommendItems.map((item) => (
+        {recommendItems?.map((item) => (
           <RecommendItem key={item.productId} {...item} $bgColor={$bgColor} />
         ))}
       </RecommendItemContainer>
