@@ -25,7 +25,7 @@ const OAuthCallback = () => {
         {
           code,
           client_id: import.meta.env.VITE_GOOGLE_AUTH_CLIENT_ID,
-          redirect_uri: "postmessage",
+          redirect_uri: window.location.origin,
           grant_type: "authorization_code",
         }
       );

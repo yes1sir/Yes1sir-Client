@@ -47,6 +47,8 @@ const LoginComponent = () => {
       localStorage.setItem("userId", userInfo.sub);
       localStorage.setItem("userName", userInfo.name);
 
+      console.log(localStorage);
+
       if (!localStorage.getItem("hasCompletedAgeInfo")) {
         navigate("/age");
       } else {
