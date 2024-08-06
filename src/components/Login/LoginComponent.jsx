@@ -30,10 +30,15 @@ const LoginComponent = () => {
 
   const handleLoginSuccess = async (tokenResponse) => {
     console.log("Token response:", tokenResponse);
+    const { access_token } = tokenResponse;
+    if (!access_token) {
+      console.error("Access token is undefined");
+      return;
+    }
     try {
       const userInfo = await axios.get(
         "https://www.googleapis.com/oauth2/v3/userinfo",
-        { headers: { Authorization: `Bearer ${tokenResponse.access_token}` } }
+        { headers: { Authorization: `Bearer ${access_token}` } }
       );
 
       console.log("User info:", userInfo);
