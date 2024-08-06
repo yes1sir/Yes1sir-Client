@@ -25,7 +25,7 @@ const LoginComponent = () => {
     onSuccess: (tokenResponse) => handleLoginSuccess(tokenResponse),
     onError: () => console.log("Login Failed"),
     flow: "auth-code", // 추가: auth code flow 사용
-    redirectUri: "https://yes1sir.vercel.app/oauth/callback", // 콜백 경로 설정
+    redirect_uri: "https://yes1sir.vercel.app/oauth/callback", // 콜백 경로 설정
   });
 
   const handleLoginSuccess = async (tokenResponse) => {
