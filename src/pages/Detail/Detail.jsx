@@ -5,6 +5,8 @@ import DetailTop from "@/components/Detail/DetailTop";
 import DetailMiddle from "@/components/Detail/DetailMiddle";
 import ReviewModal from "@/components/Detail/ReviewModal";
 import DetailBottom from "@/components/Detail/DetailBottom";
+import { useLocation } from "react-router-dom";
+
 import axios from "axios";
 
 function Detail() {
@@ -14,6 +16,10 @@ function Detail() {
   const [userName, setUserName] = useState("");
   const [editingReview, setEditingReview] = useState(null);
   const detailBottomRef = useRef(null);
+  const location = useLocation();
+  const { skinType } = location.state;
+
+  console.log(skinType);
 
   useEffect(() => {
     const storedUserName = localStorage.getItem("userName");
