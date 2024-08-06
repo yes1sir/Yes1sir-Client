@@ -1,13 +1,16 @@
 import styled from "styled-components";
+
 import { useLocation } from "react-router-dom";
 
 function DetailMbtiCircle() {
   const location = useLocation();
-  const { $bgColor } = location.state;
+  const { $bgColor, skinType } = location.state;
+
+  console.log(skinType);
 
   return (
     <DetailMbtiCircleWrapper>
-      <Circle $bgColor={$bgColor}></Circle>
+      <Circle $bgColor={$bgColor}>{skinType}</Circle>
     </DetailMbtiCircleWrapper>
   );
 }
