@@ -1,8 +1,8 @@
-// LoginComponent.jsx
 import { useEffect } from "react";
 import { useGoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import axios from "axios";
 import Backspace from "../../components/common/Backspace";
 import LoginTop from "./LoginTop";
 import GoogleIcon from "@/assets/svgs/google_logo.svg?react";
@@ -25,27 +25,23 @@ const LoginComponent = () => {
     onSuccess: (codeResponse) => handleLoginSuccess(codeResponse),
     onError: () => console.log("로그인 실패"),
     flow: "auth-code",
-    ux_mode: "popup",
-    scope: "profile email",
   });
 
   const handleLoginSuccess = async (codeResponse) => {
     console.log("로그인 응답:", codeResponse);
 
-    const { access_token } = codeResponse;
-    if (!access_token) {
-      console.error("액세스 토큰이 정의되지 않았습니다");
+    const { code } = codeResponse;
+    if (!code) {
+      console.error("인증 코드가 정의되지 않았습니다");
       return;
     }
 
     try {
-      const result = await fetch(
-        "https://www.googleapis.com/oauth2/v3/userinfo",
-        {
-          headers: { Authorization: `Bearer ${access_token}` },
-        }
-      );
-      const userInfo = await result.json();
+      // 인증 코드를 액세스 토큰으로 교환
+      const tokens = await exchangeCodeForTokens(code);
+
+      // 액세스 토큰으로 사용자 정보 가져오기
+      const userInfo = await getUserInfo(tokens.access_token);
 
       localStorage.setItem("isLoggedIn", "true");
       localStorage.setItem("userId", userInfo.sub);
@@ -57,9 +53,29 @@ const LoginComponent = () => {
         navigate("/homelogin");
       }
     } catch (error) {
-      console.error("사용자 정보 가져오기 오류:", error);
+      console.error("로그인 프로세스 오류:", error);
       navigate("/login");
     }
+  };
+
+  const exchangeCodeForTokens = async (code) => {
+    const response = await axios.post("https://oauth2.googleapis.com/token", {
+      code,
+      client_id: import.meta.env.VITE_GOOGLE_AUTH_CLIENT_ID,
+      redirect_uri: window.location.origin,
+      grant_type: "authorization_code",
+    });
+    return response.data;
+  };
+
+  const getUserInfo = async (access_token) => {
+    const response = await axios.get(
+      "https://www.googleapis.com/oauth2/v3/userinfo",
+      {
+        headers: { Authorization: `Bearer ${access_token}` },
+      }
+    );
+    return response.data;
   };
 
   return (
