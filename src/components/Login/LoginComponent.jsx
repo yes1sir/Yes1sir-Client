@@ -15,26 +15,28 @@ const LoginComponent = () => {
     if (isLoggedIn === "true") {
       if (!localStorage.getItem("hasCompletedAgeInfo")) {
         navigate("/age");
-        console.log(localStorage);
       } else {
         navigate("/homelogin");
       }
     }
   }, [navigate]);
 
-  console.log(localStorage);
-
   const login = useGoogleLogin({
     onSuccess: (tokenResponse) => handleLoginSuccess(tokenResponse),
     onError: () => console.log("Login Failed"),
+    flow: "auth-code", // 추가: auth code flow 사용
+    redirectUri: "https://yes1sir.vercel.app/oauth/callback", // 콜백 경로 설정
   });
 
   const handleLoginSuccess = async (tokenResponse) => {
+    console.log("Token response:", tokenResponse);
     try {
       const userInfo = await axios.get(
         "https://www.googleapis.com/oauth2/v3/userinfo",
         { headers: { Authorization: `Bearer ${tokenResponse.access_token}` } }
       );
+
+      console.log("User info:", userInfo);
 
       localStorage.setItem("isLoggedIn", "true");
       localStorage.setItem("userId", userInfo.data.sub);

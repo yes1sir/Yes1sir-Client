@@ -8,7 +8,7 @@ import Age from "@/pages/Age/Age";
 import Target from "@/pages/Target/Target";
 import Test from "@/pages/Test/Test";
 import Detail from "@/pages/Detail/Detail";
-
+import OAuthCallback from "@/pages/OAuthCallBAck/OAuthCallBack";
 export const router = createBrowserRouter([
   {
     path: "",
@@ -45,6 +45,10 @@ export const router = createBrowserRouter([
       {
         path: "/Test",
         element: <Test />,
+      },
+      {
+        path: "/oauth/callback",
+        element: <OAuthCallback />, // OAuth 콜백 경로 추가
       },
     ],
   },
