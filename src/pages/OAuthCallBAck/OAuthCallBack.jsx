@@ -25,7 +25,7 @@ const OAuthCallback = () => {
         {
           code,
           client_id: import.meta.env.VITE_GOOGLE_AUTH_CLIENT_ID,
-          redirect_uri: "https://yes1sir.vercel.app/oauth/callback",
+          redirect_uri: "postmessage",
           grant_type: "authorization_code",
         }
       );
